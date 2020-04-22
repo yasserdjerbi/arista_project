@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- view invoice customer inherit -->
+        <record id="fal_view_move_inherit" model="ir.ui.view">
+            <field name="name">account.move.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="npwp" attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': [('type', '=', 'entry')]}" />
+                    <field name="ppkp" attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': [('type', 'in', ['entry', 'in_invoice', 'in_refund', 'in_receipt'])]}"/>
+                    <field name="nomor_faktur_pajak" attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': [('type', 'in', ['entry', 'out_invoice', 'out_refund', 'out_receipt'])]}"/>
+                    <field name="faktur_pajak_id" attrs="{'readonly': [('state', '!=', 'draft')], 'invisible': [('type', 'in', ['entry', 'in_invoice', 'in_refund', 'in_receipt'])]}" domain="[('pajak_type', '=', 'out'),('state','=','0')]"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

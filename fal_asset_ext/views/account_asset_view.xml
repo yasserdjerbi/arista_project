@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_account_asset_category_form_ttext">
+            <field name="name">account.asset.category.form.ttext</field>
+            <field name="model">account.asset</field>
+            <field name="inherit_id" ref="account_asset.view_account_asset_form" />
+            <field name="arch" type="xml">
+                <field name="asset_type" position="after">
+                    <group attrs="{'invisible': [('state', '!=', 'model')]}">
+                        <field name="fal_type" />
+                        <field name="parent_id" />
+                        <field name="fal_manage_selection" />
+                    </group>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_account_asset_purchase_tree_falsbext">
+            <field name="name">account.asset.purchase.tree.falsbext</field>
+            <field name="model">account.asset</field>
+            <field name="inherit_id" ref="account_asset.view_account_asset_purchase_tree" />
+            <field name="arch" type="xml">
+                <field name="name" position="before">
+                    <field name="fal_asset_number"/>
+                </field>
+                <field name="value_residual" position="after">
+                    <field name="method_number" />
+                    <field name="fal_closing_date" />
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_account_asset_form_ttext">
+            <field name="name">account.asset.form.ttext</field>
+            <field name="model">account.asset</field>
+            <field name="inherit_id" ref="account_asset.view_account_asset_form" />
+            <field name="arch" type="xml">
+                
+                <field name="name" position="before">
+                    <span attrs="{'invisible': [('state', '=', 'model')]}">
+                        <field name="fal_asset_number" class="oe_inline" readonly="1"/> - 
+                    </span>
+                </field>
+                 <field name="first_depreciation_date" position="replace">
+                    <field name="first_depreciation_date" attrs="{'invisible': ['|', ('state', '=', 'model'), ('date_first_depreciation', '!=', 'manual')]}"/>
+                    <field name="fal_second_depreciation_date" attrs="{'invisible': ['|', ('state', '=', 'model'), ('date_first_depreciation', '!=', 'manual')]}"/>
+                </field>
+                <xpath expr="//field[@name='first_depreciation_date']" position='before'>
+                    <field name="date_first_depreciation" attrs="{'invisible': [('state', '=', 'model')]}"/>
+                </xpath>
+                <xpath expr="//notebook" position='inside'>
+                    <page string="Other Information" name="other" attrs="{'invisible': [('state', '=', 'model')]}">
+                        <group>
+                            <group string="Closing">
+                                <field name="fal_closing_date" />
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_account_asset_search_ttext" model="ir.ui.view">
+            <field name="name">account.asset.search.ttext</field>
+            <field name="model">account.asset</field>
+            <field name="inherit_id" ref="account_asset.view_account_asset_search" />
+            <field name="arch" type="xml">
+                <field name="name" position="before">
+                    <field name="fal_asset_number" />
+                    <field name="original_move_line_ids" />
+                </field>
+            </field>
+        </record>
+
+        <record id="view_account_move_line" model="ir.ui.view">
+            <field name="name">account.move.line</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_move_line_tree_grouped" />
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="analytic_account_id" />
+                </field>
+            </field>
+        </record>
+
+        <record id="view_account_asset_ext_form" model="ir.ui.view">
+            <field name="name">account.account</field>
+            <field name="model">account.account</field>
+            <field name="inherit_id" ref="account_asset.view_account_form_asset_inherit" />
+            <field name="arch" type="xml">
+                <field name="asset_model" position="attributes">
+                    <attribute name="domain">[('state', '=', 'model'), ('asset_type', '=', asset_type), ('fal_type', '=', 'normal')]</attribute>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

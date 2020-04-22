@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_fal_multi_confirm_asset_wizard_form" model="ir.ui.view">
+        <field name="name">fal.multi.confirm.asset.wizard.form</field>
+        <field name="model">fal.multi.confirm.asset.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <span><b><i>This process will Confirm all selected Asset.</i></b></span>
+                </sheet>
+                <footer>
+                    <button string="Confirm" name="action_confirm" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+           </form>
+        </field>
+    </record>
+
+    <act_window name="Multi Confirm Asset"
+        res_model="fal.multi.confirm.asset.wizard"
+        binding_model="account.asset"
+        view_mode="form"
+        target="new"
+        binding_views="form,list"
+        id="action_fal_multi_confirm_asset_wizard"/>
+</odoo>

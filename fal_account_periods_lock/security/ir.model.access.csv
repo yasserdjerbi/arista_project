@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_fal_account_periods_lock_user,fal.account.periods.lock.user,model_fal_account_periods_lock,account.group_account_invoice,1,0,0,0
+access_fal_account_periods_lock_manager,fal.account.periods.lock.manager,model_fal_account_periods_lock,account.group_account_user,1,1,1,1
+access_fal_account_periods_lock_line_user,fal.account.periods.lock.line.user,model_fal_account_periods_lock_line,account.group_account_invoice,1,0,0,0
+access_fal_account_periods_lock_line_manager,fal.account.periods.lock.manager.user,model_fal_account_periods_lock_line,account.group_account_user,1,1,1,1

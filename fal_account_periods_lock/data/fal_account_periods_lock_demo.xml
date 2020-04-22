@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Creating demo data for accounts periods lock for this year - 1 -->
+        <record id="falacc001" model="fal.account.periods.lock">
+            <field name="name" eval="(datetime.now() - timedelta(days=1*365)).strftime('%Y')"/>
+            <field name="code" eval="(datetime.now() - timedelta(days=1*365)).strftime('%Y')"/>
+            <field name="date_start" eval="(datetime.now() - timedelta(days=1*365)).strftime('%Y')+'-01-01'"/>
+            <field name="date_stop" eval="(datetime.now() - timedelta(days=1*365)).strftime('%Y')+'-12-31'"/>
+            <field name="lock_gap_days_adviser">750</field>
+        </record>
+        <function model="fal.account.periods.lock" name="create_period1">
+            <value eval="[ref('fal_account_periods_lock.falacc001')]"/>
+        </function>
+
+        <!-- Creating demo data for accounts periods lock for this year -->
+        <record id="falacc002" model="fal.account.periods.lock">
+            <field name="name" eval="time.strftime('%Y')"/>
+            <field name="code" eval="time.strftime('%Y')"/>
+            <field name="date_start" eval="time.strftime('%Y')+'-01-01'"/>
+            <field name="date_stop" eval="time.strftime('%Y')+'-12-31'"/>
+            <field name="lock_gap_days_adviser">750</field>
+        </record>
+        <function model="fal.account.periods.lock" name="create_period1">
+            <value eval="[ref('fal_account_periods_lock.falacc002')]"/>
+        </function>
+
+        <!-- Creating demo data for accounts periods lock for this year + 1 -->
+        <record id="falacc003" model="fal.account.periods.lock">
+            <field name="name" eval="(datetime.now() + timedelta(days=1*365)).strftime('%Y')"/>
+            <field name="code" eval="(datetime.now() + timedelta(days=1*365)).strftime('%Y')"/>
+            <field name="date_start" eval="(datetime.now() + timedelta(days=1*365)).strftime('%Y')+'-01-01'"/>
+            <field name="date_stop" eval="(datetime.now() + timedelta(days=1*365)).strftime('%Y')+'-12-31'"/>
+            <field name="lock_gap_days_adviser">750</field>
+        </record>
+        <function model="fal.account.periods.lock" name="create_period1">
+            <value eval="[ref('fal_account_periods_lock.falacc003')]"/>
+        </function>
+
+        <!-- Creating demo data for accounts periods lock for this year + 2 -->
+        <record id="falacc004" model="fal.account.periods.lock">
+            <field name="name" eval="(datetime.now() + timedelta(days=2*365)).strftime('%Y')"/>
+            <field name="code" eval="(datetime.now() + timedelta(days=2*365)).strftime('%Y')"/>
+            <field name="date_start" eval="(datetime.now() + timedelta(days=2*365)).strftime('%Y')+'-01-01'"/>
+            <field name="date_stop" eval="(datetime.now() + timedelta(days=2*365)).strftime('%Y')+'-12-31'"/>
+            <field name="lock_gap_days_adviser">750</field>
+        </record>
+        <function model="fal.account.periods.lock" name="create_period1">
+            <value eval="[ref('fal_account_periods_lock.falacc004')]"/>
+        </function>
+
+        <!-- Creating demo data for accounts periods lock for this year + 3 -->
+        <record id="falacc005" model="fal.account.periods.lock">
+            <field name="name" eval="(datetime.now() + timedelta(days=3*365)).strftime('%Y')"/>
+            <field name="code" eval="(datetime.now() + timedelta(days=3*365)).strftime('%Y')"/>
+            <field name="date_start" eval="(datetime.now() + timedelta(days=3*365)).strftime('%Y')+'-01-01'"/>
+            <field name="date_stop" eval="(datetime.now() + timedelta(days=3*365)).strftime('%Y')+'-12-31'"/>
+            <field name="lock_gap_days_adviser">750</field>
+        </record>
+        <function model="fal.account.periods.lock" name="create_period1">
+            <value eval="[ref('fal_account_periods_lock.falacc005')]"/>
+        </function>
+
+        <!-- Creating demo data for accounts periods lock for this year + 4 -->
+        <record id="falacc006" model="fal.account.periods.lock">
+            <field name="name" eval="(datetime.now() + timedelta(days=4*365)).strftime('%Y')"/>
+            <field name="code" eval="(datetime.now() + timedelta(days=4*365)).strftime('%Y')"/>
+            <field name="date_start" eval="(datetime.now() + timedelta(days=4*365)).strftime('%Y')+'-01-01'"/>
+            <field name="date_stop" eval="(datetime.now() + timedelta(days=4*365)).strftime('%Y')+'-12-31'"/>
+            <field name="lock_gap_days_adviser">750</field>
+        </record>
+        <function model="fal.account.periods.lock" name="create_period1">
+            <value eval="[ref('fal_account_periods_lock.falacc006')]"/>
+        </function>
+
+        <!-- Creating demo data for accounts periods lock for this year + 5 -->
+        <record id="falacc007" model="fal.account.periods.lock">
+            <field name="name" eval="(datetime.now() + timedelta(days=5*365)).strftime('%Y')"/>
+            <field name="code" eval="(datetime.now() + timedelta(days=5*365)).strftime('%Y')"/>
+            <field name="date_start" eval="(datetime.now() + timedelta(days=5*365)).strftime('%Y')+'-01-01'"/>
+            <field name="date_stop" eval="(datetime.now() + timedelta(days=5*365)).strftime('%Y')+'-12-31'"/>
+            <field name="lock_gap_days_adviser">750</field>
+        </record>
+        <function model="fal.account.periods.lock" name="create_period1">
+            <value eval="[ref('fal_account_periods_lock.falacc007')]"/>
+        </function>
+
+        <!-- Creating demo data for accounts periods lock for this year + 6 -->
+        <record id="falacc008" model="fal.account.periods.lock">
+            <field name="name" eval="(datetime.now() + timedelta(days=6*365)).strftime('%Y')"/>
+            <field name="code" eval="(datetime.now() + timedelta(days=6*365)).strftime('%Y')"/>
+            <field name="date_start" eval="(datetime.now() + timedelta(days=6*365)).strftime('%Y')+'-01-01'"/>
+            <field name="date_stop" eval="(datetime.now() + timedelta(days=6*365)).strftime('%Y')+'-12-31'"/>
+            <field name="lock_gap_days_adviser">750</field>
+        </record>
+        <function model="fal.account.periods.lock" name="create_period1">
+            <value eval="[ref('fal_account_periods_lock.falacc008')]"/>
+        </function>
+    </data>
+</odoo>

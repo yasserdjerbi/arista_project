@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_efaktur_inv" model="ir.ui.view">
+        <field name="name">E-Faktur</field>
+        <field name="model">fal.account.invoice</field>
+        <field name="arch" type="xml">
+            <form string="E-Faktur">
+                <p class="oe_grey">
+                    E-Faktur will be created in csv format.
+                </p>
+                <footer>
+                    <button name="export_efaktur" string="Export E-Faktur" type="object"
+                        class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_view_efaktur_inv" model="ir.actions.act_window">
+        <field name="name">E-Faktur</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">fal.account.invoice</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_efaktur_inv"/>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="account.model_account_move" />
+    </record>
+</odoo>

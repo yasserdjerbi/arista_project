@@ -1,0 +1,324 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* fal_account_periods_lock
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-08-13 04:18+0000\n"
+"PO-Revision-Date: 2018-08-31 09:35+0700\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: fr\n"
+"X-Generator: Poedit 2.1.1\n"
+
+#. module: fal_account_periods_lock
+#: model:ir.model,name:fal_account_periods_lock.model_account_move
+msgid "Account Entry"
+msgstr "Écriture comptable"
+
+#. module: fal_account_periods_lock
+#: model:ir.ui.view,arch_db:fal_account_periods_lock.view_fal_account_periods_lock_line_form
+msgid "Account Period"
+msgstr "Période comptable"
+
+#. module: fal_account_periods_lock
+#: model:ir.model.fields,field_description:fal_account_periods_lock.field_fal_account_periods_lock_line_adviser_locking_date
+msgid "Adviser Locking Date"
+msgstr "Date de blocage du Chef Comptable"
+
+#. module: fal_account_periods_lock
+#: model:ir.actions.act_window,help:fal_account_periods_lock.action_fal_account_periods_lock_line
+msgid ""
+"An accounting period typically is a month or a quarter. It\n"
+"                usually corresponds to the periods of the tax declaration."
+msgstr "Une période est en général un mois, un trimestre ou un quadrimestre."
+
+#. module: fal_account_periods_lock
+#: model:ir.actions.act_window,help:fal_account_periods_lock.action_fal_account_periods_lock_line
+msgid "Click to add a fiscal period."
+msgstr "Cliquer pour ajouter une période fiscale."
+
+#. module: fal_account_periods_lock
+#: model:ir.actions.act_window,help:fal_account_periods_lock.action_fal_account_periods_lock
+msgid "Click to start a new fiscal year."
+msgstr "Cliquer pour commencer une nouvelle année fiscale."
+
+#. module: fal_account_periods_lock
+#: selection:fal.account.periods.lock,state:0
+#: selection:fal.account.periods.lock.line,state:0
+#: model:ir.ui.view,arch_db:fal_account_periods_lock.view_fal_account_periods_lock_form
+#: model:ir.ui.view,arch_db:fal_account_periods_lock.view_fal_account_periods_lock_search
+msgid "Closed"
+msgstr "Fermé"
+
+#. module: fal_account_periods_lock
+#: model:ir.model.fields,field_description:fal_account_periods_lock.field_fal_account_periods_lock_code
+#: model:ir.model.fields,field_description:fal_account_periods_lock.field_fal_account_periods_lock_line_code
+msgid "Code"
+msgstr "Code"
+
+#. module: fal_account_periods_lock
+#: model:ir.model.fields,field_description:fal_account_periods_lock.field_fal_account_periods_lock_company_id
+#: model:ir.model.fields,field_description:fal_account_periods_lock.field_fal_account_periods_lock_line_company_id
+msgid "Company"
+msgstr "Société"
+
+#. module: fal_account_periods_lock
+#: model:ir.ui.view,arch_db:fal_account_periods_lock.view_fal_account_periods_lock_form
+msgid "Create 3 Months Periods"
+msgstr "Créer des périodes de 3 mois"
+
+#. module: fal_account_periods_lock
+#: model:ir.ui.view,arch_db:fal_account_periods_lock.view_fal_account_periods_lock_form
+msgid "Create Monthly Periods"
+msgstr "Créer des périodes mensuelles"
+
+#. module: fal_account_periods_lock
+#: model:ir.model.fields,field_description:fal_account_periods_lock.field_fal_account_periods_lock_create_uid
+#: model:ir.model.fields,field_description:fal_account_periods_lock.field_fal_account_periods_lock_line_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: fal_account_periods_lock
+#: model:ir.model.fields,field_description:fal_account_periods_lock.field_fal_account_periods_lock_create_date
+#: model:ir.model.fields,field_description:fal_account_periods_lock.field_fal_account_periods_lock_line_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: fal_account_periods_lock
+#: model:ir.actions.act_window,help:fal_account_periods_lock.action_fal_account_periods_lock
+msgid ""
+"Define your company's financial year according to your needs. A\n"
+"                financial year is a period at the end of which a company's\n"
+"                accounts are made up (usually 12 months). The financial year is\n"
+"                usually referred to by the date in which it ends. For example,\n"
+"                if a company's financial year ends November 30, 2011, then\n"
+"                everything between December 1, 2010 and November 30, 2011\n"
+"                would be referred to as FY 2011."
+msgstr ""
+"Définissez l'année comptable de votre société selon vos besoins. Une\n"
+"                année comptable est une période à l'issue de laquelle s'opère la clôture des comptes\n"
+"                (généralement 12 mois). L'année comptable se réfère\n"
+"               généralement à l'année de clôture de ses comptes . Par exemple,\n"
+"               si l'année comptable d'une société se termine le 30 novembre 2011, alors\n"
+"                tout élément entre le 1er décembre 2010 et le 30 novembre 2011\n"
+"                se référera à l'année comptable 2011."
+
+#. module: fal_account_periods_lock
+#: model:ir.model.fields,field_description:fal_account_periods_lock.field_fal_account_periods_lock_display_name
+#: model:ir.model.fields,field_description:fal_account_periods_lock.field_fal_account_periods_lock_line_display_name
+msgid "Display Name"
+msgstr "Nom à afficher"
+
+#. module: fal_account_periods_lock
+#: model:ir.ui.view,arch_db:fal_account_periods_lock.view_fal_account_periods_lock_line_form
+msgid "Duration"
+msgstr "Durée"
+
+#. module: fal_account_periods_lock
+#: model:ir.model.fields,field_description:fal_account_periods_lock.field_fal_account_periods_lock_date_stop
+msgid "End Date"
+msgstr "Date de fin"
+
+#. module: fal_account_periods_lock
+#: model:ir.model.fields,field_description:fal_account_periods_lock.field_fal_account_periods_lock_line_date_stop
+msgid "End of Period"
+msgstr "Fin de la période"
+
+#. module: fal_account_periods_lock
+#: code:addons/fal_account_periods_lock/models/fal_account_periods_lock.py:42
+#: code:addons/fal_account_periods_lock/models/fal_account_periods_lock.py:148
+#: code:addons/fal_account_periods_lock/models/fal_account_periods_lock.py:161
+#, python-format
+msgid ""
+"Error!\n"
+"The start date of a fiscal year must precede its end date."
+msgstr ""
+"Erreur!\n"
+"La date de départ d'une année fiscale doit précéder sa date de fin."
+
+#. module: fal_account_periods_lock
+#: model:ir.model.fields,help:fal_account_periods_lock.field_fal_account_periods_lock_name
+msgid "Filled it with the Name Of Year"
+msgstr "Complété avec le nom de l'année"
+
+#. module: fal_account_periods_lock
+#: model:ir.ui.view,arch_db:fal_account_periods_lock.view_fal_account_periods_lock_search
+msgid "Fiscal Year"
+msgstr "Exercice fiscal"
+
+#. module: fal_account_periods_lock
+#: model:ir.ui.view,arch_db:fal_account_periods_lock.view_fal_account_periods_lock_form
+msgid "Fiscal year"
+msgstr "Année fiscale"
+
+#. module: fal_account_periods_lock
+#: model:ir.ui.view,arch_db:fal_account_periods_lock.view_fal_account_periods_lock_tree
+msgid "Fiscalyear"
+msgstr "Année fiscale"
+
+#. module: fal_account_periods_lock
+#: code:addons/fal_account_periods_lock/models/fal_account_periods_lock.py:194
+#, python-format
+msgid "Go to the configuration panel"
+msgstr "Aller au panneau de configuration"
+
+#. module: fal_account_periods_lock
+#: model:ir.ui.view,arch_db:fal_account_periods_lock.view_fal_account_periods_lock_search
+msgid "Group By"
+msgstr "Regrouper par"
+
+#. module: fal_account_periods_lock
+#: model:ir.model.fields,field_description:fal_account_periods_lock.field_fal_account_periods_lock_id
+#: model:ir.model.fields,field_description:fal_account_periods_lock.field_fal_account_periods_lock_line_id
+msgid "ID"
+msgstr "ID"
+
+#. module: fal_account_periods_lock
+#: model:ir.model.fields,field_description:fal_account_periods_lock.field_fal_account_periods_lock___last_update
+#: model:ir.model.fields,field_description:fal_account_periods_lock.field_fal_account_periods_lock_line___last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: fal_account_periods_lock
+#: model:ir.model.fields,field_description:fal_account_periods_lock.field_fal_account_periods_lock_line_write_uid
+#: model:ir.model.fields,field_description:fal_account_periods_lock.field_fal_account_periods_lock_write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: fal_account_periods_lock
+#: model:ir.model.fields,field_description:fal_account_periods_lock.field_fal_account_periods_lock_line_write_date
+#: model:ir.model.fields,field_description:fal_account_periods_lock.field_fal_account_periods_lock_write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: fal_account_periods_lock
+#: model:ir.model.fields,field_description:fal_account_periods_lock.field_fal_account_periods_lock_lock_gap_days_adviser
+msgid "Lock Gap Days Adviser"
+msgstr "Lock Gap Days Conseiller"
+
+#. module: fal_account_periods_lock
+#: model:ir.model.fields,field_description:fal_account_periods_lock.field_fal_account_periods_lock_lock_gap_days_non_adviser
+msgid "Lock Gap Days Non-Adviser"
+msgstr "Lock Gap Days Non-Conseiller"
+
+#. module: fal_account_periods_lock
+#: model:ir.ui.view,arch_db:fal_account_periods_lock.view_fal_account_periods_lock_form
+#: model:ir.ui.view,arch_db:fal_account_periods_lock.view_fal_account_periods_lock_line_tree
+msgid "Lock Period"
+msgstr "Bloquer Période"
+
+#. module: fal_account_periods_lock
+#: model:ir.model.fields,field_description:fal_account_periods_lock.field_fal_account_periods_lock_line_non_adviser_locking_date
+msgid "Non-adviser locking Date"
+msgstr "Date de blocage Comptable"
+
+#. module: fal_account_periods_lock
+#: selection:fal.account.periods.lock,state:0
+#: selection:fal.account.periods.lock.line,state:0
+#: model:ir.ui.view,arch_db:fal_account_periods_lock.view_fal_account_periods_lock_search
+msgid "Open"
+msgstr "Ouvert"
+
+#. module: fal_account_periods_lock
+#: model:ir.ui.view,arch_db:fal_account_periods_lock.view_fal_account_periods_lock_form
+#: model:ir.ui.view,arch_db:fal_account_periods_lock.view_fal_account_periods_lock_line_tree
+msgid "Open Period"
+msgstr "Ouvrir Période"
+
+#. module: fal_account_periods_lock
+#: model:ir.model,name:fal_account_periods_lock.model_fal_account_periods_lock_line
+#: model:ir.ui.view,arch_db:fal_account_periods_lock.view_fal_account_periods_lock_form
+#: model:ir.ui.view,arch_db:fal_account_periods_lock.view_fal_account_periods_lock_line_search
+#: model:ir.ui.view,arch_db:fal_account_periods_lock.view_fal_account_periods_lock_line_tree
+msgid "Period"
+msgstr "Période"
+
+#. module: fal_account_periods_lock
+#: model:ir.model.fields,field_description:fal_account_periods_lock.field_fal_account_periods_lock_line_name
+#: model:ir.model.fields,field_description:fal_account_periods_lock.field_fal_account_periods_lock_name
+msgid "Period Name"
+msgstr "Nom de la période"
+
+#. module: fal_account_periods_lock
+#: model:ir.actions.act_window,name:fal_account_periods_lock.action_fal_account_periods_lock_line
+#: model:ir.model.fields,field_description:fal_account_periods_lock.field_fal_account_periods_lock_period_ids
+#: model:ir.ui.menu,name:fal_account_periods_lock.menu_action_fal_account_periods_lock_line
+#: model:ir.ui.menu,name:fal_account_periods_lock.menu_fal_periods
+msgid "Periods"
+msgstr "Périodes"
+
+#. module: fal_account_periods_lock
+#: model:ir.actions.act_window,name:fal_account_periods_lock.action_fal_account_periods_lock
+#: model:ir.ui.menu,name:fal_account_periods_lock.menu_action_fal_account_periods_lock
+msgid "Periods Lock"
+msgstr "Blocage des périodes"
+
+#. module: fal_account_periods_lock
+#: model:ir.model.fields,field_description:fal_account_periods_lock.field_fal_account_periods_lock_line_fiscalyear_id
+msgid "Periods Lock Name"
+msgstr "Nom des périodes de blocage"
+
+#. module: fal_account_periods_lock
+#: model:ir.model,name:fal_account_periods_lock.model_fal_account_periods_lock
+msgid "Resurfacing Fiscal Year (v8)"
+msgstr "Retour de l'année fiscale (v8)"
+
+#. module: fal_account_periods_lock
+#: model:ir.ui.view,arch_db:fal_account_periods_lock.view_fal_account_periods_lock_search
+msgid "Search Fiscalyear"
+msgstr "Rechercher l'année fiscale"
+
+#. module: fal_account_periods_lock
+#: model:ir.ui.view,arch_db:fal_account_periods_lock.view_fal_account_periods_lock_line_search
+msgid "Search Period"
+msgstr "Rechercher la période"
+
+#. module: fal_account_periods_lock
+#: model:ir.ui.view,arch_db:fal_account_periods_lock.view_fal_account_periods_lock_form
+msgid "Set to Open"
+msgstr "Mettre à Ouvert"
+
+#. module: fal_account_periods_lock
+#: model:ir.model.fields,field_description:fal_account_periods_lock.field_fal_account_periods_lock_date_start
+msgid "Start Date"
+msgstr "Date de début"
+
+#. module: fal_account_periods_lock
+#: model:ir.model.fields,field_description:fal_account_periods_lock.field_fal_account_periods_lock_line_date_start
+msgid "Start of Period"
+msgstr "Départ de la Période"
+
+#. module: fal_account_periods_lock
+#: model:ir.model.fields,field_description:fal_account_periods_lock.field_fal_account_periods_lock_line_state
+#: model:ir.model.fields,field_description:fal_account_periods_lock.field_fal_account_periods_lock_state
+#: model:ir.ui.view,arch_db:fal_account_periods_lock.view_fal_account_periods_lock_search
+msgid "Status"
+msgstr "Statut"
+
+#. module: fal_account_periods_lock
+#: sql_constraint:fal.account.periods.lock.line:0
+msgid "The name of the period must be unique per company!"
+msgstr "Le nom de la période doit être unique par entité!"
+
+#. module: fal_account_periods_lock
+#: code:addons/fal_account_periods_lock/models/fal_account_periods_lock.py:190
+#, python-format
+msgid ""
+"There is no period defined for this date: %s.\n"
+"Please go to Configuration/Periods and configure a fiscal year."
+msgstr ""
+"Il n'y a pas de période définie pour cette date: %s.\n"
+"Merci de configurer au préalable les périodes et années fiscales."
+
+#. module: fal_account_periods_lock
+#: code:addons/fal_account_periods_lock/models/fal_account_periods_lock.py:232
+#, python-format
+msgid "You cannot add/modify entries prior to and inclusive of the lock date %s. Check the company settings or ask someone with the 'Adviser' role"
+msgstr "Vous ne pouvez pas ajouter/modifier des entrées antérieures à la date de blocage %s. Vérifier la configuration de la société ou demander à votre chef comptable."

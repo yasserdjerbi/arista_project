@@ -1,0 +1,17 @@
+<odoo>
+    <record id="faktur_pajak_on_res_partner" model="ir.ui.view">
+        <field name="name">faktur_pajak_on_res_partner</field>
+        <field name="model">res.partner</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="account.view_partner_property_form"/>
+        <field name="arch" type="xml">
+            <group name="fiscal_information" position="after">
+                <group name="pajak_indonesia" string="Indonesian Tax">
+                    <field name="npwp"/>
+                    <field name="pkp_status"/>
+                    <field name="ppkp" attrs="{'invisible': [('pkp_status', '=', 'nonpkp')]}"/>
+                </group>
+            </group>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_faktur_pajak,access_faktur_pajak,model_faktur_pajak,base.group_user,1,1,1,1
+access_faktur_pajak_line,access_faktur_pajak_line,model_faktur_pajak_line,base.group_user,1,1,1,1
