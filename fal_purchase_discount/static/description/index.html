@@ -1,0 +1,228 @@
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <h2 class="oe_slogan" style="color:#0d6723;">Purchase Discount</h2>
+        <h3 class="oe_slogan">Disount on Purchase Lines</h3>
+        <h4 class="oe_slogan"><a href="https://www.cluedoo.com">CLuedoo</a> </h4>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <h4 class="oe_slogan" style="color:#0d6723;">Story behind the features</h4>
+    <div class="oe_row oe_spaced">
+        <div class="oe_span4 text-justify">
+            <h6 style="text-align: center; font-size: 18px; padding: 0px 0px 20px; margin: 0px 0px 0px;"><b>ODOO BEHAVIOR</b></h6>
+            <p style="margin: 0px 0px 12px;">
+                Odoo does not give the possibility to manage discount on purchase order line.
+           </p>
+
+            <h6 style="text-align: center; font-size: 18px; padding: 0px 0px 20px;  margin: 0px 0px 0px;"><b>CLUEDOO BEHAVIOR</b></h6>
+            <p style="margin: 0px 0px 12px;">
+                Add this basic feature to the purchase order line.
+            </p>
+           
+        </div>
+        <div class="oe_span4 text-justify">
+            <h6 style="text-align: center; font-size: 18px; padding: 0px 0px 20px;  margin: 0px 0px 0px;"><b>MODULE +</b></h6>
+            <p style="margin: 0px 0px 12px;">
+                Just a must in order to have purchase order which correspond to supplier proposition.
+            </p>
+            <h6 style="text-align: center; font-size: 18px; padding: 0px 0px 20px;  margin: 0px 0px 0px;"><b>BUSINESS CASE</b></h6>
+            <p style="margin: 0px 0px 12px;">
+                <ul>
+                    <li>
+                        During negotiation process, you try to get discount and you want to track that in order to analyze purchase results.
+                    </li>
+                    <li>
+                        Discount management on catalog based suppliers. Your supplier have a catalog price and give you a discount based on the pricelist: this discount module associated with the supplier pricelist module give a full flexibility to manage supplier prices (as Odoo standard propose on customer side).
+                    </li>
+                </ul>
+            </p>
+        </div>
+        <div class="oe_span4 text-justify">
+            <h6 style="text-align: center; font-size: 18px; padding: 0px 0px 20px;  margin: 0px 0px 0px;"><b>CLUEDOO RECOMENDATION</b></h6>
+            <p style="margin: 0px 0px 12px;">
+                Installation on 100% of the databases from the beginning. We recommend to use analytic account for all the integration.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark" style="margin: 0px 0px 0px;">
+    <h4 class="oe_slogan" style="color:#0d6723;">Our Feature as Solution</h4>
+    <div class="row" style="margin: 20px 0px 0px;">
+        <div class="pt32 pb32 text-center col-lg-6">
+            <h4>Able to put discount in purchase order lines</h4>
+        </div>
+        <div class="pt32 pb32 text-center col-lg-6">
+            <h4>This discount also appears on vendor bill lines</h4>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <h4 class="oe_slogan" style="color:#0d6723;">How to Use this Module?</h4>
+    </div>
+</section>
+
+<section class="oe_container oe_dark" style="width: 100%">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span4 text-justify">
+            <h3 class="oe_mt8">
+                <b>Step 1</b>
+            </h3>
+            <p>
+               Create a new product, select product type, product category, and let the cost be 0.
+            </p>
+        </div>
+        <div class="oe_span8">
+            <img class="oe_picture oe_screenshot" src="fal_purchase_discount/static/description/fal_purchase_discount1.png" style="width:600px"/>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark" style="width: 100%">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span4 text-justify">
+            <h3 class="oe_mt8">
+                <b>Step 2</b>
+            </h3>
+            <p>
+                Open the product category All / Saleable / Office Furniture, and set the configuration:
+                <ul>
+                    <li>
+                        <b>Costing Method</b> : Average Cost
+                    </li>
+                    <li>
+                        <b>Inventory Valuation</b> : Automated
+                    </li>
+                </ul>
+            </p>
+        </div>
+        <div class="oe_span8">
+            <img class="oe_picture oe_screenshot" src="fal_purchase_discount/static/description/fal_purchase_discount2.png" style="width:600px"/>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span4 text-justify">
+            <h3 class="oe_mt8">
+                <b>Step 3</b>
+            </h3>
+            <p>
+                Now create RFQ for Test Product
+                Quantity: 10
+                Unit Price: $10
+                Discount: 10%
+                Total Price should be $90
+            </p>
+        </div>
+        <div class="oe_span8">
+            <img class="oe_picture oe_screenshot" src="fal_purchase_discount/static/description/fal_purchase_discount3.png" style="width:600px"/>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span4 text-justify">
+            <h3 class="oe_mt8">
+                <b>Step 4</b>
+            </h3>
+            <p>
+                Confirm order, receive products, and validate. The status of receipt transfer will be done.
+            </p>
+        </div>
+        <div class="oe_span8">
+            <img class="oe_picture oe_screenshot" src="fal_purchase_discount/static/description/fal_purchase_discount4.png" style="width:600px"/>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span4 text-justify">
+            <h3 class="oe_mt8"/>
+        </div>
+        <div class="oe_span8">
+            <img class="oe_picture oe_screenshot" src="fal_purchase_discount/static/description/fal_purchase_discount5.png" style="width:600px"/>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span4 text-justify">
+            <h3 class="oe_mt8">
+                <b>Step 5</b>
+            </h3>
+            <p>
+                As we set the inventory valuation of product category is automated, the stock journal will be recorded for the receipt transfer. To check, go to Accounting app > Accounting menu > Journal Entries. Here we have stock journal for WH/IN/00010 with stock valuation account $90.
+            </p>
+        </div>
+        <div class="oe_span8">
+            <img class="oe_picture oe_screenshot" src="fal_purchase_discount/static/description/fal_purchase_discount6.png" style="width:600px"/>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span4 text-justify">
+            <h3 class="oe_mt8">
+                <b>Step 6</b>
+            </h3>
+            <p>
+                Now check the inventory valuation. Go to Inventory > Reporting > Inventory Valuation. The value of 10 units of Test Product is $90.
+            </p>
+        </div>
+        <div class="oe_span8">
+            <img class="oe_picture oe_screenshot" src="fal_purchase_discount/static/description/fal_purchase_discount7.png" style="width:600px"/>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span4 text-justify">
+            <h3 class="oe_mt8">
+                <b>Step 7</b>
+            </h3>
+            <p>
+                Check product price, the cost should be $9.
+            </p>
+        </div>
+        <div class="oe_span8">
+            <img class="oe_picture oe_screenshot" src="fal_purchase_discount/static/description/fal_purchase_discount8.png" style="width:600px"/>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container" style="width: 100%">
+     <h2 class="oe_slogan" style="margin-top:20px;" >Need Any Help?</h2>
+    <div class="oe_slogan" style="margin-top:10px !important;">
+        <div>
+            <a
+            class="btn btn-primary btn-lg mt8" style="background: #339933; color: #FFFFFF !important;border-radius: 0;"
+            href="https://www.cluedoo.com/contact" target="_blank"><i
+            class="fa fa-phone"></i> Contact Us </a>
+
+            <a
+            class="btn btn-primary btn-lg mt8" style="background: #339933; color: #FFFFFF !important;border-radius: 0;"
+            href="https://www.cluedoo.com/shop/" target="_blank"><i
+            class="fa fa-suitcase"></i> Other CLuedoo Addons </a>
+
+            <a
+            class="btn btn-primary btn-lg mt8" style="background: #339933; color: #FFFFFF !important;border-radius: 0;"
+            href="https://www.cluedoo.com/about" target="_blank"><i
+            class="fa fa-wrench"></i> Other Services </a>
+
+        </div>
+        <br>
+        <a href="https://www.cluedoo.com/" target="_blank">
+            <img src="fal_purchase_discount/static/description/CLuedoo_logo.png" style="width: 128; margin-bottom: 20px;" class="center-block">
+        </a>
+    </div>
+</section>
