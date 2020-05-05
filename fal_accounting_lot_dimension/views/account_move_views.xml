@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <record id="account_lot_view_move_form" model="ir.ui.view">
+      <field name="name">account.lot.view.move.form</field>
+      <field name="model">account.move</field>
+      <field name="inherit_id" ref="account.view_move_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//notebook/page[@id='invoice_tab']/field/tree/field[@name='name']" position='after'>
+          <field name="product_tracking" invisible="1"/>
+          <field name="lot_id" attrs="{'invisible': [('product_tracking', 'in', ['none', False])]}" groups="stock.group_production_lot"/>
+        </xpath>
+        <xpath expr="//notebook/page[@id='invoice_tab']/field/form//field[@name='product_id']" position='after'>
+          <field name="product_tracking" invisible="1"/>
+          <field name="lot_id" attrs="{'invisible': [('product_tracking', 'in', ['none', False])]}" groups="stock.group_production_lot"/>
+        </xpath>
+      </field>
+  </record>
+
+  <!-- Lot View-->
+  <record id="search_product_lot_filter_inherit_accounting" model="ir.ui.view">
+    <field name="name">stock.production.lot.search.inherit.accounting</field>
+    <field name="model">stock.production.lot</field>
+    <field name="inherit_id" ref="stock.search_product_lot_filter"/>
+    <field name="arch" type="xml">
+        <xpath expr="//field[@name='product_id']" position="after">
+            <filter string="Can be Sold" name="filter_to_sell" domain="[('product_id.sale_ok','=',True)]"/>
+            <filter string="Can be Purchased" name="filter_to_purchase" domain="[('product_id.purchase_ok', '=', True)]"/>
+        </xpath>
+    </field>
+ </record>
+
+ <!-- Lot Action -->
+   <record id="action_production_lot_invoice_form" model="ir.actions.act_window">
+      <field name="name">Lots/Serial Numbers</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">stock.production.lot</field>
+      <field name="view_ids"
+                 eval="[(5, 0, 0),
+                        (0, 0, {'view_mode': 'tree', 'view_id': ref('stock.view_production_lot_tree')}),
+                        (0, 0, {'view_mode': 'form', 'view_id': ref('stock.view_production_lot_form')})]"/>
+      <field name="search_view_id" ref="stock.search_product_lot_filter"/>
+      <field name="context">{'search_default_group_by_product': 1, 'search_default_filter_to_sell': 1, 'display_complete': True, 'default_company_id': allowed_company_ids[0]}</field>
+      <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+          Add a lot/serial number
+        </p><p>
+          This is the list of all the production lots you recorded. When
+          you select a lot, you can get the traceability of the products contained in lot.
+        </p>
+      </field>
+  </record>
+
+  <record id="action_production_lot_bill_form" model="ir.actions.act_window">
+      <field name="name">Lots/Serial Numbers</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">stock.production.lot</field>
+      <field name="view_ids"
+                 eval="[(5, 0, 0),
+                        (0, 0, {'view_mode': 'tree', 'view_id': ref('stock.view_production_lot_tree')}),
+                        (0, 0, {'view_mode': 'form', 'view_id': ref('stock.view_production_lot_form')})]"/>
+      <field name="search_view_id" ref="stock.search_product_lot_filter"/>
+      <field name="context">{'search_default_group_by_product': 1, 'search_default_filter_to_purchase': 1, 'display_complete': True, 'default_company_id': allowed_company_ids[0]}</field>
+      <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+          Add a lot/serial number
+        </p><p>
+          This is the list of all the production lots you recorded. When
+          you select a lot, you can get the traceability of the products contained in lot.
+        </p>
+      </field>
+  </record>
+
+  <!-- Lot menu-->
+      <menuitem action="action_production_lot_invoice_form" id="menu_action_invoice_production_lot_form"
+        parent="account.menu_finance_receivables" groups="stock.group_production_lot"
+        sequence="105"/>
+
+      <menuitem action="action_production_lot_bill_form" id="menu_action_bills_production_lot_form"
+        parent="account.menu_finance_payables" groups="stock.group_production_lot"
+        sequence="110"/>
+</odoo>

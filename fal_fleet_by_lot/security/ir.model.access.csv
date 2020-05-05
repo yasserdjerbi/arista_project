@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+stock_production_lot_fleet,stock_production_lot_fleet,stock.model_stock_production_lot,fleet.fleet_group_manager,1,0,0,0

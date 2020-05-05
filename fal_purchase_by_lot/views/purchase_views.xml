@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- Lot Action -->
+	<record id="action_production_lot_purchase_form" model="ir.actions.act_window">
+      <field name="name">Lots/Serial Numbers</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">stock.production.lot</field>
+      <field name="view_ids"
+                 eval="[(5, 0, 0),
+                        (0, 0, {'view_mode': 'tree', 'view_id': ref('stock.view_production_lot_tree')}),
+                        (0, 0, {'view_mode': 'form', 'view_id': ref('stock.view_production_lot_form')})]"/>
+      <field name="search_view_id" ref="stock.search_product_lot_filter"/>
+      <field name="context">{'search_default_group_by_product': 1, 'search_default_filter_to_purchase': 1, 'display_complete': True, 'default_company_id': allowed_company_ids[0]}</field>
+      <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+          Add a lot/serial number
+        </p><p>
+          This is the list of all the production lots you recorded. When
+          you select a lot, you can get the traceability of the products contained in lot.
+        </p>
+      </field>
+  </record>
+  <!-- Lot menu-->
+  <menuitem action="action_production_lot_purchase_form" id="menu_action_purchase_production_lot_form"
+    parent="purchase.menu_purchase_products" groups="stock.group_production_lot"
+    sequence="31"/>
+  <!-- Purchase view-->
+  <record id="lot_purchase_order_form" model="ir.ui.view">
+    <field name="name">lot.purchase.order.form</field>
+    <field name="model">purchase.order</field>
+    <field name="inherit_id" ref="purchase.purchase_order_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//notebook/page[1]/field[@name='order_line']/tree/field[@name='name']" position='after'>
+          <field name="product_tracking" invisible="1"/>
+          <field name="po_lot_ids" attrs="{'invisible': [('product_tracking', 'in', ['none', False])]}" widget="many2many_tags" context="{'default_product_tracking': product_tracking}"/>
+        </xpath>
+        <xpath expr="//notebook/page[1]/field[@name='order_line']/form//field[@name='product_id']" position='after'>
+          <field name="product_tracking" invisible="1"/>
+          <field name="po_lot_ids" attrs="{'invisible': [('product_tracking', 'in', ['none', False])]}" context="{'default_product_tracking': product_tracking}">
+            <tree>
+              <field name="lot"/>
+              <field name="qty"/>
+            </tree>
+            <form>
+              <group>
+                <field name="po_line_id" groups="base.group_no_one"/>
+                <field name="lot"/>
+                <field name="qty"/>
+              </group>
+            </form>
+          </field>
+        </xpath>
+    </field>
+  </record>
+  <!-- Purchase Order Line LOT view-->
+  <record id="lot_purchase_order_line_form" model="ir.ui.view">
+    <field name="name">Purchase Order Line LOT</field>
+    <field name="model">purchase.order.line.lot</field>
+    <field name="arch" type="xml">
+      <form string="Purchase Order Line LOT">
+        <group>
+          <field name="po_line_id" groups="base.group_no_one"/>
+          <field name="product_tracking" groups="base.group_no_one"/>
+          <field name="lot"/>
+          <field name="qty"/>
+        </group>
+      </form>
+    </field>
+  </record>
+</odoo>

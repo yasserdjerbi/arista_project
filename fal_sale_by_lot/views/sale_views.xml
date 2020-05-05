@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <record id="sale_lot_form_view_inherit_stock" model="ir.ui.view">
+      <field name="name">sale.lot.form.inherit.stock</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_order_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//notebook/page[@name='order_lines']/field/tree/field[@name='name']" position='after'>
+          <field name="product_tracking" invisible="1"/>
+          <field name="lot_id" attrs="{'invisible': [('product_tracking', 'in', ['none', False])]}"/>
+        </xpath>
+        <xpath expr="//notebook/page[@name='order_lines']/field/form//field[@name='product_id']" position='after'>
+          <field name="product_tracking" invisible="1"/>
+          <field name="lot_id" attrs="{'invisible': [('product_tracking', 'in', ['none', False])]}"/>
+        </xpath>
+      </field>
+  </record>
+
+  <!-- Lot Action -->
+  <record id="action_production_lot_sale_form" model="ir.actions.act_window">
+      <field name="name">Lots/Serial Numbers</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">stock.production.lot</field>
+      <field name="view_ids"
+                 eval="[(5, 0, 0),
+                        (0, 0, {'view_mode': 'tree', 'view_id': ref('stock.view_production_lot_tree')}),
+                        (0, 0, {'view_mode': 'form', 'view_id': ref('stock.view_production_lot_form')})]"/>
+      <field name="search_view_id" ref="stock.search_product_lot_filter"/>
+      <field name="context">{'search_default_group_by_product': 1, 'search_default_filter_to_sell': 1, 'display_complete': True, 'default_company_id': allowed_company_ids[0]}</field>
+      <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+          Add a lot/serial number
+        </p><p>
+          This is the list of all the production lots you recorded. When
+          you select a lot, you can get the traceability of the products contained in lot.
+        </p>
+      </field>
+  </record>
+
+  <!-- Lot menu-->
+      <menuitem action="action_production_lot_sale_form" id="menu_action_sale_production_lot_form"
+        parent="sale.product_menu_catalog" groups="stock.group_production_lot"
+        sequence="2"/>
+</odoo>
