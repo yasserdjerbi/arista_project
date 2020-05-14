@@ -1,0 +1,118 @@
+<odoo>
+	<data noupdate="0">
+		<record model="ir.rule" id="move_business_type_rule">
+	        <field name="name">Account Entry multi-channel</field>
+	        <field name="model_id" ref="model_account_move"/>
+	        <field name="global" eval="True"/>
+	        <field name="domain_force">['|',('fal_business_type', 'in', user.fal_business_type_ids.ids), ('fal_business_type','=',False)]</field>
+	    </record>
+
+	    <record model="ir.rule" id="move_line_business_type_rule">
+	        <field name="name">Entry Lines multi-channel</field>
+	        <field name="model_id" ref="model_account_move_line"/>
+	        <field name="global" eval="True"/>
+	        <field name="domain_force">['|',('fal_business_type', 'in', user.fal_business_type_ids.ids), ('fal_business_type','=',False)]</field>
+	    </record>
+
+	    <record model="ir.rule" id="move_report_business_type_rule">
+	        <field name="name">Invoice Analysis multi-channel</field>
+	        <field name="model_id" ref="model_account_invoice_report"/>
+	        <field name="global" eval="True"/>
+	        <field name="domain_force">['|',('fal_business_type', 'in', user.fal_business_type_ids.ids), ('fal_business_type','=',False)]</field>
+	    </record>
+
+	    <record model="ir.rule" id="account_root_report_business_type_rule">
+	        <field name="name">Account Root multi-channel</field>
+	        <field name="model_id" ref="model_account_root"/>
+	        <field name="global" eval="True"/>
+	        <field name="domain_force">['|',('fal_business_type', 'in', user.fal_business_type_ids.ids), ('fal_business_type','=',False)]</field>
+	    </record>
+
+	   	<record model="ir.rule" id="journal_group_business_type_rule">
+	        <field name="name">Journal Group multi-channel</field>
+	        <field name="model_id" ref="model_account_journal_group"/>
+	        <field name="global" eval="True"/>
+	        <field name="domain_force">['|',('fal_business_type', 'in', user.fal_business_type_ids.ids), ('fal_business_type','=',False)]</field>
+	    </record>
+
+	    <record model="ir.rule" id="journal_business_type_rule">
+	        <field name="name">Journal multi-channel</field>
+	        <field name="model_id" ref="model_account_journal"/>
+	        <field name="global" eval="True"/>
+	        <field name="domain_force">['|',('fal_business_type', 'in', user.fal_business_type_ids.ids), ('fal_business_type','=',False)]</field>
+	    </record>
+
+	    <record model="ir.rule" id="account_account_business_type_rule">
+	        <field name="name">Account multi-channel</field>
+	        <field name="model_id" ref="model_account_account"/>
+	        <field name="global" eval="True"/>
+	        <field name="domain_force">['|',('fal_business_type', 'in', user.fal_business_type_ids.ids), ('fal_business_type','=',False)]</field>
+	    </record>
+
+	    <record model="ir.rule" id="account_tax_business_type_rule">
+	        <field name="name">Tax multi-channel</field>
+	        <field name="model_id" ref="model_account_tax"/>
+	        <field name="global" eval="True"/>
+	        <field name="domain_force">['|',('fal_business_type', 'in', user.fal_business_type_ids.ids), ('fal_business_type','=',False)]</field>
+	    </record>
+
+	    <record model="ir.rule" id="account_fiscal_business_type_rule">
+	        <field name="name">Account Fiscal multi-channel</field>
+	        <field name="model_id" ref="model_account_fiscal_position"/>
+	        <field name="global" eval="True"/>
+	        <field name="domain_force">['|',('fal_business_type', 'in', user.fal_business_type_ids.ids), ('fal_business_type','=',False)]</field>
+	    </record>
+
+	    <record model="ir.rule" id="account_statement_business_type_rule">
+	        <field name="name">Account Bank statement multi-channel</field>
+	        <field name="model_id" ref="model_account_bank_statement"/>
+	        <field name="global" eval="True"/>
+	        <field name="domain_force">['|',('fal_business_type', 'in', user.fal_business_type_ids.ids), ('fal_business_type','=',False)]</field>
+	    </record>
+
+	   	<record model="ir.rule" id="account_statement_line_business_type_rule">
+	        <field name="name">Account Bank statement line multi-channel</field>
+	        <field name="model_id" ref="model_account_bank_statement_line"/>
+	        <field name="global" eval="True"/>
+	        <field name="domain_force">['|',('fal_business_type', 'in', user.fal_business_type_ids.ids), ('fal_business_type','=',False)]</field>
+	    </record>
+
+	   	<record model="ir.rule" id="account_reconcile_model_business_type_rule">
+	        <field name="name">Account reconcile model multi-channel</field>
+	        <field name="model_id" ref="model_account_reconcile_model"/>
+	        <field name="global" eval="True"/>
+	        <field name="domain_force">['|',('fal_business_type', 'in', user.fal_business_type_ids.ids), ('fal_business_type','=',False)]</field>
+	    </record>
+
+	    <record model="ir.rule" id="account_payment_business_type_rule">
+	        <field name="name">Account Payment multi-channel</field>
+	        <field name="model_id" ref="model_account_payment"/>
+	        <field name="global" eval="True"/>
+	        <field name="domain_force">['|',('fal_business_type', 'in', user.fal_business_type_ids.ids), ('fal_business_type','=',False)]</field>
+	    </record>
+
+	    <record model="ir.rule" id="account_payment_term_business_type_rule">
+	        <field name="name">Account Payment Term multi-channel</field>
+	        <field name="model_id" ref="model_account_payment_term"/>
+	        <field name="global" eval="True"/>
+	        <field name="domain_force">['|',('fal_business_type', 'in', user.fal_business_type_ids.ids), ('fal_business_type','=',False)]</field>
+	    </record>
+
+
+    <!--
+
+    <record id="account_root_comp_rule" model="ir.rule">
+        <field name="name">Account Root multi-company</field>
+        <field name="model_id" ref="model_account_root"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="invoice_analysis_comp_rule" model="ir.rule">
+        <field name="name">Invoice Analysis multi-company</field>
+        <field name="model_id" ref="model_account_invoice_report"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+    </record> -->
+	</data>
+</odoo>

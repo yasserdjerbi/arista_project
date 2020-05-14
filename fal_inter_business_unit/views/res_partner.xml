@@ -1,0 +1,21 @@
+<odoo>
+	<record id="res_partner_business_account_form_view" model="ir.ui.view">
+		<field name="name">res.partner.business.account.form</field>
+		<field name="model">res.partner</field>
+		<field name="inherit_id" ref="account.view_partner_property_form"/>
+		<field name="arch" type="xml">
+
+			<xpath expr="//page[@name='accounting']/group" position="inside">
+				<group string="Business Account">
+					<field name="fal_business_partner_account_ids" attrs="{'invisible': [('is_business_partner', '=', False)]}" nolabel="1">
+						<tree editable="buttom">
+							<field name="fal_business_type"/>
+							<field name="property_business_account_receivable_id"/>
+							<field name="property_business_account_payable_id"/>
+						</tree>
+					</field>
+				</group>
+			</xpath>
+		</field>
+	</record>
+</odoo>

@@ -1,0 +1,3 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_fal_business_type_user,business.partner.account,model_business_partner_account,base.group_user,1,0,0,0
+access_fal_business_type_account,business.partner.account,model_business_partner_account,account.group_account_user,1,1,1,1

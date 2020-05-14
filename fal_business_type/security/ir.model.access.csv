@@ -1,0 +1,3 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_fal_business_type_user,fal.business.type,model_fal_business_type,base.group_user,1,0,0,0
+access_fal_business_type_system,fal.business.type,model_fal_business_type,base.group_erp_manager,1,1,1,1

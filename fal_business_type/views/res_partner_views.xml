@@ -1,0 +1,12 @@
+<odoo>
+	<record id="res_partner_business_account_form_view" model="ir.ui.view">
+		<field name="name">res.partner.business.account.form</field>
+		<field name="model">res.partner</field>
+		<field name="inherit_id" ref="base.view_partner_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='name']" position="after">
+				<field name="is_business_partner" readonly="1" invisible="1"/>
+			</xpath>
+		</field>
+	</record>
+</odoo>

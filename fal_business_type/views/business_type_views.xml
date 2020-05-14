@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_clu_business_type_tree" model="ir.ui.view">
+            <field name="name">clu.business.type.tree</field>
+            <field name="model">fal.business.type</field>
+            <field name="arch" type="xml">
+                <tree string="Business Type">
+                    <field name="name"/>
+                    <field name="fal_business_prefix"/>
+                    <field name="fal_business_suffix"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_clu_business_type_form" model="ir.ui.view">
+            <field name="name">clu.business.type.form</field>
+            <field name="model">fal.business.type</field>
+            <field name="arch" type="xml">
+                <form string="Business Type">
+                <header>
+                    <button name="launch_create_menu_wizard" string="Create Menu" type="object" class="oe_highlight" invisible="1"/>
+                </header>
+                    <sheet>
+                        <field name="active" invisible="1"/>
+                        <widget name="web_ribbon" text="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="company_id"/>
+                            </group>
+                            <group>
+                                <field name="partner_id"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="fal_business_prefix"/>
+                            </group>
+                            <group>
+                                <field name="fal_business_suffix"/>
+                            </group>
+                        </group>
+                        <notebook id="clu_business_type_note" invisible="1">
+                        </notebook>
+                        <group col="3" string="Legend (for prefix, suffix)">
+                            <group>
+                                <span colspan="2">Current Year with Century: %%(year)s</span>
+                                <span colspan="2">Current Year without Century: %%(y)s</span>
+                                <span colspan="2">Month: %%(month)s</span>
+                                <span colspan="2">Day: %%(day)s</span>
+                            </group>
+                            <group>
+                                <span colspan="2">Day of the Year: %%(doy)s</span>
+                                <span colspan="2">Week of the Year: %%(woy)s</span>
+                                <span colspan="2">Day of the Week (0:Monday): %%(weekday)s</span>
+                            </group>
+                            <group>
+                                <span colspan="2">Hour 00->24: %%(h24)s</span>
+                                <span colspan="2">Hour 00->12: %%(h12)s</span>
+                                <span colspan="2">Minute: %%(min)s</span>
+                                <span colspan="2">Second: %%(sec)s</span>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_clu_business_type_tree_action" model="ir.actions.act_window">
+            <field name="name">Business Type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">fal.business.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a Business Type.
+              </p>
+            </field>
+        </record>
+
+        <menuitem action="view_clu_business_type_tree_action" id="fal_menu_business_type"
+            parent="base.menu_users"
+            sequence="20" />
+    </data>
+</odoo>

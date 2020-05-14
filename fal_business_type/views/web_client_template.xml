@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+	    <template id="assets_backend_business_types" inherit_id="web.assets_backend">
+		    <xpath expr="." position="inside">
+		        <script type="text/javascript" src="/fal_business_type/static/src/js/widgets/switch_business_type_menu.js"></script>
+		        <script type="text/javascript" src="/fal_business_type/static/src/js/widgets/switch_company_menu.js"></script>
+		    </xpath>
+	    </template>
+	    <template id="assets_common_business_types" inherit_id="web.assets_common">
+		    <xpath expr="." position="inside">
+		        <script type="text/javascript" src="/fal_business_type/static/src/js/core/session.js"></script>
+		    </xpath>
+	    </template>
+    </data>
+</odoo>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- On business type form view -->
+        <record id="view_business_type_purchase_ext_form" model="ir.ui.view">
+            <field name="name">business_type.purchase.ext.form</field>
+            <field name="model">fal.business.type</field>
+            <field name="inherit_id" ref="fal_business_type.view_clu_business_type_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook[@id='clu_business_type_note']" position="attributes">
+                    <attribute name="invisible">0</attribute>
+                </xpath>
+                <xpath expr="//notebook[@id='clu_business_type_note']" position="inside">
+                    <page id="clu_purchase_seq_page" string="Purchase Sequence">
+                        <group>
+                            <group>
+                                <field name="purchase_sequence_id" context="{'default_prefix': fal_business_prefix, 'default_suffix': fal_business_suffix}"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+                <xpath expr="//button[@name='launch_create_menu_wizard']" position="attributes">
+                    <attribute name="invisible">0</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

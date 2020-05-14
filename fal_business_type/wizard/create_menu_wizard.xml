@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="business_create_menu_wizard_form_view">
+        <field name="name">business.create.menu.wizard.form</field>
+        <field name="model">create.menu.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Create Business Type Menu">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="parent_menu_id"/>
+                        </group>
+                        <group>
+                            <field name="select_action" required="1"/>
+                            <field name="action" domain="[('res_model', '=', select_action)]" attrs="{'invisible': [('select_action', '=', False)]}"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="create_business_menu" string="Create Menu" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

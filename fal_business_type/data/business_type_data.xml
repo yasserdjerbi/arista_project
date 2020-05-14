@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+		<record id="main_business_type_partner" model="res.partner">
+	        <field name="name">Business Type A</field>
+	        <field name="company_id" ref="base.main_company"/>
+	        <field name="is_business_partner">1</field>
+	    </record>
+	    <record id="main_business_type" model="fal.business.type">
+	        <field name="name">Business Type A</field>
+	        <field name="company_id" ref="base.main_company"/>
+	        <field name="partner_id" ref="main_business_type_partner"/>
+	    </record>
+	</data>
+</odoo>
