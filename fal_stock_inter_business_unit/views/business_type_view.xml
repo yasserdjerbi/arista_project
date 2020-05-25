@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+         <record id="view_business_type_stock_inter_business_form" model="ir.ui.view">
+            <field name="name">business_type.stock.inter.form</field>
+            <field name="model">fal.business.type</field>
+            <field name="inherit_id" ref="fal_inter_business_unit.view_business_type_inter_business_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[1]" position="after">
+                    <page name="inter_company" string="Inter Business Transfer">
+                        <group>
+                            <group>
+                                <field name="enable_inter_bu_transfer"/>
+                                <field name="apply_transfer_type" widget="radio" attrs="{'invisible': [('enable_inter_bu_transfer', '=', False)]}"/>
+                                <field name="id" invisible="1"/>
+                                <field name="destination_warehouse_id" domain="[('fal_business_type', '=', id)]"
+                                       attrs="{'invisible': [('enable_inter_bu_transfer', '=', False)],
+                                               'required': [('enable_inter_bu_transfer', '=', True)]}"/>
+                                <field name="default_picking_type_id" domain="[('fal_business_type', '=', id)]"
+                                       attrs="{'invisible': [('enable_inter_bu_transfer', '=', False)],
+                                               'required': [('enable_inter_bu_transfer', '=', True)]}"/>
+                            </group>
+                            <group attrs="{'invisible': [('enable_inter_bu_transfer', '=', False)]}">
+                              <div class="alert alert-info">
+                                <field name="message"/>
+                              </div>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+         </record>
+    </data>
+</odoo>

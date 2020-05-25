@@ -1,0 +1,12 @@
+<odoo>
+	<record id="ir_property_form_business_unit" model="ir.ui.view">
+		<field name="name">ir.property.form.business.unit.form</field>
+		<field name="model">ir.property</field>
+		<field name="inherit_id" ref="base.ir_property_view"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='company_id']" position="after">
+				<field name="fal_business_type"/>
+			</xpath>
+		</field>
+	</record>
+</odoo>
