@@ -32,39 +32,12 @@
     <field name="arch" type="xml">
         <xpath expr="//notebook/page[1]/field[@name='order_line']/tree/field[@name='name']" position='after'>
           <field name="product_tracking" invisible="1"/>
-          <field name="po_lot_ids" attrs="{'invisible': [('product_tracking', 'in', ['none', False])]}" widget="many2many_tags" context="{'default_product_tracking': product_tracking}"/>
+          <field name="lot_id" attrs="{'invisible': [('product_tracking', 'in', ['none', False])]}"/>
         </xpath>
         <xpath expr="//notebook/page[1]/field[@name='order_line']/form//field[@name='product_id']" position='after'>
           <field name="product_tracking" invisible="1"/>
-          <field name="po_lot_ids" attrs="{'invisible': [('product_tracking', 'in', ['none', False])]}" context="{'default_product_tracking': product_tracking}">
-            <tree>
-              <field name="lot"/>
-              <field name="qty"/>
-            </tree>
-            <form>
-              <group>
-                <field name="po_line_id" groups="base.group_no_one"/>
-                <field name="lot"/>
-                <field name="qty"/>
-              </group>
-            </form>
-          </field>
+          <field name="lot_id" attrs="{'invisible': [('product_tracking', 'in', ['none', False])]}"/>
         </xpath>
-    </field>
-  </record>
-  <!-- Purchase Order Line LOT view-->
-  <record id="lot_purchase_order_line_form" model="ir.ui.view">
-    <field name="name">Purchase Order Line LOT</field>
-    <field name="model">purchase.order.line.lot</field>
-    <field name="arch" type="xml">
-      <form string="Purchase Order Line LOT">
-        <group>
-          <field name="po_line_id" groups="base.group_no_one"/>
-          <field name="product_tracking" groups="base.group_no_one"/>
-          <field name="lot"/>
-          <field name="qty"/>
-        </group>
-      </form>
     </field>
   </record>
 </odoo>

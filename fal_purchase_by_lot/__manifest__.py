@@ -18,7 +18,6 @@ In Odoo you can't select which serial number of product you wanted to purchase o
         'fal_accounting_lot_dimension',
     ],
     'data': [
-        'security/ir.model.access.csv',
         'views/purchase_views.xml',
     ],
     'images': [
