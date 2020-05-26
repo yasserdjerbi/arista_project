@@ -66,3 +66,14 @@ class SaleOrderLine(models.Model):
         remaining.free_qty_today = False
         remaining.qty_available_today = False
         remaining.warehouse_id = False
+
+    def _prepare_invoice_line(self):
+        """
+        Prepare the dict of values to create the new invoice line for a sales order line.
+
+        :param qty: float quantity to invoice
+        """
+        self.ensure_one()
+        res = super(SaleOrderLine, self)._prepare_invoice_line()
+        res['lot_id'] = self.lot_id and self.lot_id.id or False
+        return res
