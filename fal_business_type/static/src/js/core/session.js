@@ -12,7 +12,7 @@ Session.include({
         this.rpc('/web/dataset/call_kw/res.users/write', {
                 "model": "res.users",
                 "method": "write",
-                "args": [this.uid, {fal_business_type_id: main_company_id, fal_business_type_ids: [[6, 0, company_ids]], company_id: main_business_company_id, company_ids:[[6, 0, business_company_ids]]}],
+                "args": [this.uid, {fal_business_type_id: main_company_id, fal_business_type_ids: [[6, 0, company_ids]], company_id: main_business_company_id}],
                 "kwargs": {}
             }).then(function () {
             // Also Call Odoo SetCompanies Method

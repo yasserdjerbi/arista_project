@@ -107,9 +107,6 @@ var SwitchBusinessTypeMenu = Widget.extend({
             }
         }
         session.setBusinessTypes(companyID, allowed_business_type_ids, current_company_id, current_company_ids);
-        
-        
-        // session.setCompanies(1,[1,2])
     },
 
     //--------------------------------------------------------------------------
