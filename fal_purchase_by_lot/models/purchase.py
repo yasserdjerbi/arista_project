@@ -45,5 +45,4 @@ class PurchaseOrderLine(models.Model):
     def _prepare_account_move_line(self, move):
         vals = super(PurchaseOrderLine, self)._prepare_account_move_line(move)
         vals['lot_id'] = self.lot_id
-        print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
         return vals
