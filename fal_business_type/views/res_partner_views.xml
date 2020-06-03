@@ -7,6 +7,9 @@
 			<xpath expr="//field[@name='name']" position="after">
 				<field name="is_business_partner" readonly="1" invisible="1"/>
 			</xpath>
+			<xpath expr="//page[@name='sales_purchases']/group[@name='container_row_2']/group[@name='misc']/field[@name='company_id']" position="after">
+				<field name="fal_business_type" options="{'no_create': True}" attrs="{'readonly': [('parent_id', '!=', False)]}"/>
+			</xpath>
 		</field>
 	</record>
 </odoo>
