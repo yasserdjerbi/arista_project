@@ -126,6 +126,10 @@ class AccountAccount(models.Model):
                 if account.fal_business_type.company_id != account.company_id:
                     raise AccessError(_('You cannot select business unit from different company'))
 
+    _sql_constraints = [
+        ('code_company_uniq', 'unique (code,company_id,fal_business_type)', 'The code of the account must be unique per company and per branch!')
+    ]
+
 
 class AccountTax(models.Model):
     _inherit = "account.tax"

@@ -35,6 +35,17 @@
             </field>
         </record>
 
+        <record id="fal_view_account_account_business_list" model="ir.ui.view">
+            <field name="name">account.account.business.list</field>
+            <field name="model">account.account</field>
+            <field name="inherit_id" ref="account.view_account_list"/>
+            <field name="arch" type="xml">
+                <field name="company_id" position="after">
+                    <field name="fal_business_type" options="{'no_create': True}"/>
+                </field>
+            </field>
+        </record>
+
         <record id="fal_view_account_account_business_form" model="ir.ui.view">
             <field name="name">account.account.business.form</field>
             <field name="model">account.account</field>
