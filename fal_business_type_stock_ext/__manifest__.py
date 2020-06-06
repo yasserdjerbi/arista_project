@@ -20,6 +20,7 @@
         'fal_business_type_invoice_ext',
     ],
     'data': [
+        'data/stock_data.xml',
         'security/stock_business_security.xml',
         'views/stock_inventory_views.xml',
         'views/stock_location_views.xml',

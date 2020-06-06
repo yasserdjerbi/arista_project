@@ -15,3 +15,11 @@ class Inventory(models.Model):
         states={'draft': [('readonly', False)]},
         default=_get_business_type_default,
         domain="[('company_id', '=', company_id)]")
+
+    @api.onchange('company_id')
+    def _onchange_company_id(self):
+        # Override This
+        if not self.user_has_groups('stock.group_stock_multi_locations'):
+            warehouse = self.env['stock.warehouse'].search([('company_id', '=', self.company_id.id), ('fal_business_type', '=', self.fal_business_type.id)], limit=1)
+            if warehouse:
+                self.location_ids = warehouse.lot_stock_id

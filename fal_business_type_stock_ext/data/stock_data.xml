@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- create the transit location for each company existing -->
+        <function model="fal.business.type" name="create_missing_transit_location"/>
+        <function model="fal.business.type" name="create_missing_warehouse"/>
+        <function model="fal.business.type" name="create_missing_inventory_loss_location"/>
+        <function model="fal.business.type" name="create_missing_production_location"/>
+        <function model="fal.business.type" name="create_missing_scrap_location"/>
+        <function model="fal.business.type" name="create_missing_scrap_sequence"/>
+    </data>
+</odoo>

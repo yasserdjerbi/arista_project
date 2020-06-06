@@ -23,6 +23,7 @@
         'security/business_unit_security.xml',
         'security/ir.model.access.csv',
         'views/ir_property_view.xml',
+        'views/ir_sequence_view.xml',
         'views/web_client_template.xml',
         'views/res_partner_views.xml',
         'views/business_type_views.xml',

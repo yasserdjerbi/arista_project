@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <!-- On crm lead form view -->
         <record id="view_stock_warehouse_inherit_business_type_form" model="ir.ui.view">
             <field name="name">stock.warehouse.business_type.form</field>
             <field name="model">stock.warehouse</field>
@@ -9,6 +8,17 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='company_id']" position="after">
                     <field name="fal_business_type" options="{'no_create': True}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_stock_warehouse_inherit_business_type_tree" model="ir.ui.view">
+            <field name="name">stock.warehouse.business_type.tree</field>
+            <field name="model">stock.warehouse</field>
+            <field name="inherit_id" ref="stock.view_warehouse_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="fal_business_type"/>
                 </xpath>
             </field>
         </record>

@@ -1,0 +1,23 @@
+<odoo>
+	<record id="ir_sequence_form_business_unit" model="ir.ui.view">
+		<field name="name">ir.sequence form.business.unit.form</field>
+		<field name="model">ir.sequence</field>
+		<field name="inherit_id" ref="base.sequence_view"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='company_id']" position="after">
+				<field name="fal_business_type"/>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="ir_sequence_tree_business_unit" model="ir.ui.view">
+		<field name="name">ir.sequence tree.business.unit.form</field>
+		<field name="model">ir.sequence</field>
+		<field name="inherit_id" ref="base.sequence_view_tree"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='company_id']" position="after">
+				<field name="fal_business_type"/>
+			</xpath>
+		</field>
+	</record>
+</odoo>

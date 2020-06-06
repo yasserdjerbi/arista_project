@@ -39,7 +39,7 @@ class Property(models.Model):
         domain = super(Property, self)._get_domain(prop_name, model)
 
         user_id = self.env['res.users'].browse(self.env.uid)
-        business_type_id = user_id.fal_business_type_id.id
+        business_type_id = self._context.get('force_business_type') or user_id.fal_business_type_id.id
 
         domain += [('fal_business_type', 'in', [business_type_id, False])]
         return domain
@@ -62,7 +62,7 @@ class Property(models.Model):
         # Change Start Here
         # We add new parameter to search business type
         user_id = self.env['res.users'].browse(self.env.uid)
-        business_type_id = user_id.fal_business_type_id.id
+        business_type_id = self._context.get('force_business_type') or user_id.fal_business_type_id.id
         # Change End Here
 
         if field.type == 'many2one':
@@ -149,7 +149,7 @@ class Property(models.Model):
         # Change Start Here
         # We add new parameter to search business type
         user_id = self.env['res.users'].browse(self.env.uid)
-        business_type_id = user_id.fal_business_type_id.id
+        business_type_id = self.env.context.get('force_business_type') or user_id.fal_business_type_id.id
         # Change End Here
         refs = {('%s,%s' % (model, id)): id for id in values}
         props = self.search([

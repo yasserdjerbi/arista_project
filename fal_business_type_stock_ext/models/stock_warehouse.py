@@ -13,3 +13,8 @@ class Warehouse(models.Model):
         'fal.business.type', 'Business Type',
         default=_get_business_type_default, index=True, readonly=True, required=True,
         help='Let this field empty if this location is shared between business types', domain="[('company_id', '=', company_id)]")
+
+    _sql_constraints = [
+        ('warehouse_name_uniq', 'unique(name, company_id, fal_business_type)', 'The name of the warehouse must be unique per company / Business Types!'),
+        ('warehouse_code_uniq', 'unique(code, company_id, fal_business_type)', 'The code of the warehouse must be unique per company / Business Types!'),
+    ]
