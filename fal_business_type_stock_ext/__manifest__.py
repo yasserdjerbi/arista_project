@@ -21,6 +21,7 @@
     ],
     'data': [
         'security/stock_business_security.xml',
+        'views/stock_inventory_views.xml',
         'views/stock_location_views.xml',
         'views/stock_warehouse_views.xml',
         'views/stock_picking_views.xml',
