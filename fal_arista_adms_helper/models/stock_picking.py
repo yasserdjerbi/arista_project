@@ -3,8 +3,8 @@ from odoo import models, api
 from lxml.builder import E
 
 
-class Inventory(models.AbstractModel):
-    _inherit = 'stock.inventory'
+class Picking(models.AbstractModel):
+    _inherit = 'stock.picking'
 
     @api.model_create_multi
     @api.returns('self', lambda value: value.id)
@@ -53,30 +53,48 @@ class Inventory(models.AbstractModel):
             # If it's a share id field for many2one relation
             # Find the object based on field search
             elif "x_studio_adms_id_" in key:
-                # We try to get the real field name
-                # It's always the 18th word
-                field_name = key[17:]
-                field = self.env['ir.model.fields'].search([('model_id', '=', model.id), ('name', '=', field_name)])
-                real_id = self.env[field.relation].search([('x_studio_adms_id', '=', vals[key])], limit=1)
-                new_vals[key[17:]] = real_id.id
-                new_vals[key] = vals[key]
-                if key == 'x_studio_adms_id_fal_business_type':
-                    new_vals['company_id'] = real_id.company_id.id
+                # Do not do anything if it's this 2 fields
+                if key == 'x_studio_adms_id_location_id' or key == 'x_studio_adms_id_location_dest_id':
+                    continue
+                else:
+                    # We try to get the real field name
+                    # It's always the 18th word
+                    field_name = key[17:]
+                    field = self.env['ir.model.fields'].search([('model_id', '=', model.id), ('name', '=', field_name)])
+                    real_id = self.env[field.relation].search([('x_studio_adms_id', '=', vals[key])], limit=1)
+                    new_vals[key[17:]] = real_id.id
+                    new_vals[key] = vals[key]
+                    # If it's business type, automatically fetch the company value
+                    if key == 'x_studio_adms_id_fal_business_type':
+                        new_vals['company_id'] = real_id.company_id.id
             # If it's auto locate means we need to define it's new value location
             elif 'auto_locate' in key:
                 if 'location_id' not in new_vals:
-                    company_id = self.env['fal.business.type'].browse(new_vals['fal_business_type']).company_id
-                    warehouse = self.env['stock.warehouse'].search([('company_id', '=', company_id.id), ('fal_business_type', '=', new_vals['fal_business_type'])], limit=1)
+                    business_type_id = self.env['fal.business.type'].search([('x_studio_adms_id', '=', vals['x_studio_adms_id_location_id'])], limit=1)
+                    company_id = business_type_id.company_id
+                    warehouse = self.env['stock.warehouse'].search([('company_id', '=', company_id.id), ('fal_business_type', '=', business_type_id.id)], limit=1)
                     if warehouse:
                         new_vals['location_id'] = warehouse.lot_stock_id.id
+                if 'location_dest_id' not in new_vals:
+                    business_type_id = self.env['fal.business.type'].search([('x_studio_adms_id', '=', vals['x_studio_adms_id_location_dest_id'])], limit=1)
+                    company_id = business_type_id.company_id
+                    warehouse = self.env['stock.warehouse'].search([('company_id', '=', company_id.id), ('fal_business_type', '=', business_type_id.id)], limit=1)
+                    if warehouse:
+                        new_vals['location_dest_id'] = warehouse.lot_stock_id.id
+                if 'picking_type_id' not in new_vals:
+                    business_type_id = self.env['fal.business.type'].search([('x_studio_adms_id', '=', vals['x_studio_adms_id_location_id'])], limit=1)
+                    company_id = business_type_id.company_id
+                    warehouse = self.env['stock.warehouse'].search([('company_id', '=', company_id.id), ('fal_business_type', '=', business_type_id.id)], limit=1)
+                    if warehouse:
+                        new_vals['picking_type_id'] = warehouse.out_type_id.id
             # Other field we just copy-paste
             else:
                 new_vals[key] = vals[key]
         return new_vals
 
 
-class InventoryLine(models.AbstractModel):
-    _inherit = 'stock.inventory.line'
+class Move(models.AbstractModel):
+    _inherit = 'stock.move'
 
     @api.model_create_multi
     @api.returns('self', lambda value: value.id)
@@ -125,6 +143,23 @@ class InventoryLine(models.AbstractModel):
             # If it's a share id field for many2one relation
             # Find the object based on field search
             elif "x_studio_adms_id_" in key:
+                # Do not do anything if it's this 2 fields
+                if key == 'x_studio_adms_id_location_id' or key == 'x_studio_adms_id_location_dest_id':
+                    continue
+                else:
+                    # We try to get the real field name
+                    # It's always the 18th word
+                    field_name = key[17:]
+                    field = self.env['ir.model.fields'].search([('model_id', '=', model.id), ('name', '=', field_name)])
+                    print("XXXXXXXXXXXXXXXXXXXXXXXXXXX")
+                    print(field.relation)
+                    print(vals[key])
+                    real_id = self.env[field.relation].search([('x_studio_adms_id', '=', vals[key])], limit=1)
+                    new_vals[key[17:]] = real_id.id
+                    new_vals[key] = vals[key]
+                    # If it's business type, automatically fetch the company value
+                    if key == 'x_studio_adms_id_fal_business_type':
+                        new_vals['company_id'] = real_id.company_id.id
                 # We try to get the real field name
                 # It's always the 18th word
                 field_name = key[17:]
@@ -132,15 +167,23 @@ class InventoryLine(models.AbstractModel):
                 real_id = self.env[field.relation].search([('x_studio_adms_id', '=', vals[key])], limit=1)
                 new_vals[key[17:]] = real_id.id
                 new_vals[key] = vals[key]
+                # If it's business type, automatically fetch the company value
                 if key == 'x_studio_adms_id_fal_business_type':
                     new_vals['company_id'] = real_id.company_id.id
             # If it's auto locate means we need to define it's new value location
             elif 'auto_locate' in key:
                 if 'location_id' not in new_vals:
-                    company_id = self.env['fal.business.type'].browse(new_vals['fal_business_type']).company_id
-                    warehouse = self.env['stock.warehouse'].search([('company_id', '=', company_id.id), ('fal_business_type', '=', new_vals['fal_business_type'])], limit=1)
+                    business_type_id = self.env['fal.business.type'].search([('x_studio_adms_id', '=', vals['x_studio_adms_id_location_id'])], limit=1)
+                    company_id = business_type_id.company_id
+                    warehouse = self.env['stock.warehouse'].search([('company_id', '=', company_id.id), ('fal_business_type', '=', business_type_id.id)], limit=1)
                     if warehouse:
                         new_vals['location_id'] = warehouse.lot_stock_id.id
+                if 'location_dest_id' not in new_vals:
+                    business_type_id = self.env['fal.business.type'].search([('x_studio_adms_id', '=', vals['x_studio_adms_id_location_dest_id'])], limit=1)
+                    company_id = business_type_id.company_id
+                    warehouse = self.env['stock.warehouse'].search([('company_id', '=', company_id.id), ('fal_business_type', '=', business_type_id.id)], limit=1)
+                    if warehouse:
+                        new_vals['location_dest_id'] = warehouse.lot_stock_id.id
             # Other field we just copy-paste
             else:
                 new_vals[key] = vals[key]
