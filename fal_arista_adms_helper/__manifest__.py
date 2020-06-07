@@ -18,9 +18,12 @@ ADMS / Arista have special request to just call one method to know:
         How --> On every share ID field in Odoo, the name should be:
                 x_partner_id_adms_id, which can be char/integer
                 then automatically get the 'partner_id' component
+    3. As ADMS did not want to manage stock, here we need to 'virtually' manage stock
     """,
     "depends": [
         'base',
+        'fal_business_type',
+        'stock'
     ],
     'data': [
     ],

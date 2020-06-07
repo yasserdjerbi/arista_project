@@ -23,3 +23,11 @@ class Inventory(models.Model):
             warehouse = self.env['stock.warehouse'].search([('company_id', '=', self.company_id.id), ('fal_business_type', '=', self.fal_business_type.id)], limit=1)
             if warehouse:
                 self.location_ids = warehouse.lot_stock_id
+
+
+class InventoryLine(models.Model):
+    _inherit = "stock.inventory.line"
+
+    fal_business_type = fields.Many2one(
+        'fal.business.type', 'Business Type', related='inventory_id.fal_business_type',
+        index=True, readonly=True, store=True)
