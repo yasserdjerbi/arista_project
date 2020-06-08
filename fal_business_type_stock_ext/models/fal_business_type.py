@@ -25,7 +25,6 @@ class BusinessType(models.Model):
                 'company_id': bt.company_id.id,
                 'fal_business_type': bt.id,
             })
-
             bt.write({'internal_transit_location_id': location.id})
 
             bt.partner_id.with_context(force_business_type=bt.id, force_company=bt.company_id.id).write({

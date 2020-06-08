@@ -60,8 +60,12 @@ class BaseModel(models.AbstractModel):
                 real_id = self.env[field.relation].search([('x_studio_adms_id', '=', vals[key])], limit=1)
                 new_vals[key[17:]] = real_id.id
                 new_vals[key] = vals[key]
+                # If it's Business type, means we automatically find the company
                 if key == 'x_studio_adms_id_fal_business_type':
                     new_vals['company_id'] = real_id.company_id.id
+                # Special case of created models
+                if key == 'x_studio_adms_id_x_studio_fal_business_type':
+                    new_vals['x_studio_company'] = real_id.company_id.id
             # Other field we just copy-paste
             else:
                 new_vals[key] = vals[key]
