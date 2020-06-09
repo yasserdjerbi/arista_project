@@ -64,7 +64,7 @@ class BaseModel(models.AbstractModel):
                 if key == 'x_studio_adms_id_fal_business_type':
                     new_vals['company_id'] = real_id.company_id.id
                 # Special case of created models
-                if key == 'x_studio_adms_id_x_studio_fal_business_type':
+                if key == 'x_studio_adms_id_x_studio_fal_business_type' or key == 'x_studio_adms_id_x_studio_business_type':
                     new_vals['x_studio_company'] = real_id.company_id.id
             # Other field we just copy-paste
             else:

@@ -22,6 +22,7 @@ ADMS / Arista have special request to just call one method to know:
     """,
     "depends": [
         'base',
+        'sale',
         'fal_business_type',
         'stock'
     ],
