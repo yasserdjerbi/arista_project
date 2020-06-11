@@ -8,6 +8,8 @@ class ProductDimension(models.Model):
     _description = "Product Dimension (Account)"
 
     name = fields.Char("Name")
+    company_id = fields.Many2one('res.company', string='Company')
+    fal_business_type = fields.Many2one("fal.business.type", string="Business Type", domain="[('company_id', '=', company_id)]")
 
 
 class AccountMoveLine(models.Model):
