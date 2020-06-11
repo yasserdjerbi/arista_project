@@ -24,9 +24,12 @@ ADMS / Arista have special request to just call one method to know:
         'base',
         'sale',
         'fal_business_type',
-        'stock'
+        'stock',
+        'contacts'
     ],
     'data': [
+        'security/ir.model.access.csv',
+        'views/fal_cust_vendor_group_views.xml'
     ],
     'images': [
     ],

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_x_customer_vendor_group_branch_dependant_tree" model="ir.ui.view">
+            <field name="name">x_customer_vendor_group_branch_dependanttree</field>
+            <field name="model">x_customer_vendor_group_branch_dependant</field>
+            <field name="arch" type="xml">
+                <tree string="customer_vendor_group_branch_dependant">
+                    <field name="name"/>
+                    <field name="property_business_account_receivable_id"/>
+                    <field name="property_business_account_payable_id"/>
+                    <field name="property_business_account_titipan_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_x_customer_vendor_group_branch_dependant_form" model="ir.ui.view">
+            <field name="name">x_customer_vendor_group_branch_dependantform</field>
+            <field name="model">x_customer_vendor_group_branch_dependant</field>
+            <field name="arch" type="xml">
+                <form string="customer_vendor_group_branch_dependant">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="property_business_account_receivable_id"/>
+                            <field name="property_business_account_payable_id"/>
+                            <field name="property_business_account_titipan_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_x_customer_vendor_group_branch_dependant_action" model="ir.actions.act_window">
+            <field name="name">Customer Vendor Group (ADMS)</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">x_customer_vendor_group_branch_dependant</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a x_customer_vendor_group_branch_dependant.
+              </p>
+            </field>
+        </record>
+
+        <menuitem action="view_x_customer_vendor_group_branch_dependant_action" id="fal_menu_x_customer_vendor_group_branch_dependant"
+            parent="contacts.res_partner_menu_config" name="Customer Vendor Group (ADMS)"
+            sequence="20" />
+    </data>
+</odoo>
