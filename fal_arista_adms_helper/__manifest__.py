@@ -25,7 +25,8 @@ ADMS / Arista have special request to just call one method to know:
         'sale',
         'fal_business_type',
         'stock',
-        'contacts'
+        'contacts',
+        'fal_purchase_downpayment',
     ],
     'data': [
         'security/ir.model.access.csv',
