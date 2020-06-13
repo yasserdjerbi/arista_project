@@ -31,8 +31,6 @@ class BaseModel(models.AbstractModel):
                 domain += [(business_type_field.name, '=', new_vals[business_type_field.name])]
                 similar_adms_id = self.search([('x_studio_adms_id', '=', vals['x_studio_adms_id']), ('fal_business_type', '=', new_vals['fal_business_type'])])
             similar_adms_id = self.search([('x_studio_adms_id', '=', vals['x_studio_adms_id'])])
-            print("XXXXXXXXXXXXXXXXX")
-            print(new_vals)
             if similar_adms_id:
                 result = similar_adms_id.write(new_vals)
                 return similar_adms_id
@@ -47,8 +45,8 @@ class BaseModel(models.AbstractModel):
         # There will be no error
         business_type = False
         business_type_field = model.field_id.filtered(lambda x: x.relation == 'fal.business.type')
-        business_type_adms_key = 'x_studio_adms_id_' + business_type_field.name
         if business_type_field:
+            business_type_adms_key = 'x_studio_adms_id_' + business_type_field.name
             for key in vals:
                 if key == business_type_adms_key:
                     business_type = self.env['fal.business.type'].browse(vals[key])
