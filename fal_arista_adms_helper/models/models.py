@@ -13,17 +13,25 @@ class BaseModel(models.AbstractModel):
     @api.returns('self', lambda value: value.id)
     def adms_import(self, list_vals):
         model = self.env['ir.model'].search([('model', '=', self._name)], limit=1)
+
         for vals in list_vals:
+            # 0. Business Type need to be defined here, no matter what, the header and child
+            #    should always be on the same business type
+            business_type = False
+            business_type_field = model.field_id.filtered(lambda x: x.relation == 'fal.business.type' and x.ttype == 'many2one')
+            if business_type_field:
+                business_type_adms_key = 'x_studio_adms_id_' + business_type_field.name
+                for key in vals:
+                    if key == business_type_adms_key:
+                        business_type = self.env['fal.business.type'].browse(vals[key])
             # 1. Translate any adms_id field into standard field
-            new_vals = self.iterate_and_compute(model, vals)
+            new_vals = self.iterate_and_compute(model, vals, business_type)
             # 2. Determine wether it's create new or write
             #    But to determine if it's have similar ID, it's not only based by x_studio_adms_id
             #    as because on ADMS their database are separate for each company.
             #    So, unique are, combination of Business type + ADMS ID
             #    Extra Issue are, some object did not have Business type
             #    ----------------------------
-            #    Let's determine business type field in an object
-            business_type_field = model.field_id.filtered(lambda x: x.relation == 'fal.business.type' and x.ttype == 'many2one')
             # If business type field is present, search by adms_id + business type
             # TO DO: later there is some exception object
             domain = [('x_studio_adms_id', '=', vals['x_studio_adms_id'])]
@@ -39,17 +47,13 @@ class BaseModel(models.AbstractModel):
                 return result
         return "Something Went Wrong"
 
-    def iterate_and_compute(self, model, vals):
+    def iterate_and_compute(self, model, vals, business_type):
         new_vals = {}
         # We want business type to be searched upfront, so whatever the sequence of input
         # There will be no error
-        business_type = False
         business_type_field = model.field_id.filtered(lambda x: x.relation == 'fal.business.type' and x.ttype == 'many2one')
         if business_type_field:
             business_type_adms_key = 'x_studio_adms_id_' + business_type_field.name
-            for key in vals:
-                if key == business_type_adms_key:
-                    business_type = self.env['fal.business.type'].browse(vals[key])
         # Also find the Company field as we want to fill it automatically when we found the business type
         company_type_field = model.field_id.filtered(lambda x: x.relation == 'res.company' and x.ttype == 'many2one')
 
@@ -73,7 +77,7 @@ class BaseModel(models.AbstractModel):
                     # If it's 6, Means we only relate the id, and so just need to find out the
                     # real id
                     if o2m[0] == 0:
-                        res = self.iterate_and_compute(model, o2m[2])
+                        res = self.iterate_and_compute(model, o2m[2], business_type)
                         new_vals[key] += [(0, 0, res)]
                     elif o2m[0] == 6:
                         new_o2mid = []
@@ -97,10 +101,9 @@ class BaseModel(models.AbstractModel):
 
                 # But, iF the key is business type, we do not want to search on business type.
                 # Obviously, it doesn't have business type
-                if key == business_type_adms_key:
+                if business_type_field and key == business_type_adms_key:
                     real_id = self.env[field.relation].search([('x_studio_adms_id', '=', vals[key])], limit=1)
                     # If it's Business type, means we automatically find the company
-                    print()
                     new_vals[company_type_field.name] = real_id.company_id.id
                 # Except that
                 else:
@@ -108,7 +111,7 @@ class BaseModel(models.AbstractModel):
                     # also include on our search business type domain
                     m2o_model = self.env['ir.model'].search([('model', '=', field.relation)])
                     m2o_business_type = m2o_model.field_id.filtered(lambda x: x.relation == 'fal.business.type' and x.ttype == 'many2one')
-                    if m2o_business_type and m2o_model.model not in model_exception:
+                    if business_type and m2o_business_type and m2o_model.model not in model_exception:
                         real_id = self.env[field.relation].search([('x_studio_adms_id', '=', vals[key]), (m2o_business_type.name, '=', business_type.id)], limit=1)
                     # If the object doesn't have business type
                     else:
