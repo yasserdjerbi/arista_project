@@ -2,6 +2,9 @@
 from odoo import models, api
 from lxml.builder import E
 
+# Model exception
+model_exception = ['res.partner', 'account.tax']
+
 
 class BaseModel(models.AbstractModel):
     _inherit = 'base'
@@ -14,7 +17,22 @@ class BaseModel(models.AbstractModel):
             # 1. Translate any adms_id field into standard field
             new_vals = self.iterate_and_compute(model, vals)
             # 2. Determine wether it's create new or write
+            #    But to determine if it's have similar ID, it's not only based by x_studio_adms_id
+            #    as because on ADMS their database are separate for each company.
+            #    So, unique are, combination of Business type + ADMS ID
+            #    Extra Issue are, some object did not have Business type
+            #    ----------------------------
+            #    Let's determine business type field in an object
+            business_type_field = model.field_id.filtered(lambda x: x.relation == 'fal.business.type')
+            # If business type field is present, search by adms_id + business type
+            # TO DO: later there is some exception object
+            domain = [('x_studio_adms_id', '=', vals['x_studio_adms_id'])]
+            if business_type_field and model.model not in model_exception:
+                domain += [(business_type_field.name, '=', new_vals[business_type_field.name])]
+                similar_adms_id = self.search([('x_studio_adms_id', '=', vals['x_studio_adms_id']), ('fal_business_type', '=', new_vals['fal_business_type'])])
             similar_adms_id = self.search([('x_studio_adms_id', '=', vals['x_studio_adms_id'])])
+            print("XXXXXXXXXXXXXXXXX")
+            print(new_vals)
             if similar_adms_id:
                 result = similar_adms_id.write(new_vals)
                 return similar_adms_id
@@ -25,13 +43,32 @@ class BaseModel(models.AbstractModel):
 
     def iterate_and_compute(self, model, vals):
         new_vals = {}
+        # We want business type to be searched upfront, so whatever the sequence of input
+        # There will be no error
+        business_type = False
+        business_type_field = model.field_id.filtered(lambda x: x.relation == 'fal.business.type')
+        business_type_adms_key = 'x_studio_adms_id_' + business_type_field.name
+        if business_type_field:
+            for key in vals:
+                if key == business_type_adms_key:
+                    business_type = self.env['fal.business.type'].browse(vals[key])
+        # Also find the Company field as we want to fill it automatically when we found the business type
+        company_type_field = model.field_id.filtered(lambda x: x.relation == 'res.company')
+
         # For every field in vals
         for key in vals:
             # If it's list. It can means 2 possibilities
+            # Either create new record, or link (usually many2many)
             if isinstance(vals[key], list):
                 # Need to change the model to the list field model
                 field = self.env['ir.model.fields'].search([('model_id', '=', model.id), ('name', '=', key)])
                 model = self.env['ir.model'].search([('model', '=', field.relation)], limit=1)
+                # One2many component of API call set did not "have" ADMS ID
+                # At first we do not know this, so for work around, we just don't need to
+                # find out if component already have ADMS id, just always unlink all and
+                # create a new one
+                new_vals[key] = []
+                new_vals[key] += [(5, 0, 0)]
                 for o2m in vals[key]:
                     # If it's 0, Means we need to define if it's creating new object or just
                     # editing it by checking the adms id
@@ -39,14 +76,12 @@ class BaseModel(models.AbstractModel):
                     # real id
                     if o2m[0] == 0:
                         res = self.iterate_and_compute(model, o2m[2])
-                        # If there is adms id, and adms id is already available,
-                        # means we just need to edit available adms ID
-                        if 'x_studio_adms_id' in o2m[2] and self.env[model.model].search([('x_studio_adms_id', '=', o2m[2]['x_studio_adms_id'])]):
-                            new_vals[key] = [(1, self.env[model.model].search([('x_studio_adms_id', '=', o2m[2]['x_studio_adms_id'])]).ids, res)]
-                        else:
-                            new_vals[key] = [(0, 0, res)]
+                        new_vals[key] += [(0, 0, res)]
                     elif o2m[0] == 6:
                         new_o2mid = []
+                        # Here we want to map between the ADMS id given by API to Odoo ID
+                        # As 6, means that the API only throw ADMS ID, there is no way to check
+                        # also on the business type
                         for o2mid in o2m[2]:
                             new_o2mid.append(self.env[model.model].search([('x_studio_adms_id', '=', o2mid)], limit=1).id)
                         new_vals[key] = [(6, 0, new_o2mid)]
@@ -57,15 +92,30 @@ class BaseModel(models.AbstractModel):
                 # It's always the 18th word
                 field_name = key[17:]
                 field = self.env['ir.model.fields'].search([('model_id', '=', model.id), ('name', '=', field_name)])
-                real_id = self.env[field.relation].search([('x_studio_adms_id', '=', vals[key])], limit=1)
+                # We want to find real_id of x_studio_adms_id field because they throw
+                # adms id
+                # Here, we do not only find based by adms id but also, if the object have
+                # business type, need to be searched on business type
+
+                # But, iF the key is business type, we do not want to search on business type.
+                # Obviously, it doesn't have business type
+                if key == business_type_adms_key:
+                    real_id = self.env[field.relation].search([('x_studio_adms_id', '=', vals[key])], limit=1)
+                    # If it's Business type, means we automatically find the company
+                    new_vals[company_type_field.name] = real_id.company_id.id
+                # Except that
+                else:
+                    # If business type is present
+                    # also include on our search business type domain
+                    m2o_model = self.env['ir.model'].search([('model', '=', field.relation)])
+                    m2o_business_type = m2o_model.field_id.filtered(lambda x: x.relation == 'fal.business.type')
+                    if m2o_business_type and m2o_model.model not in model_exception:
+                        real_id = self.env[field.relation].search([('x_studio_adms_id', '=', vals[key]), (m2o_business_type.name, '=', business_type.id)], limit=1)
+                    # If the object doesn't have business type
+                    else:
+                        real_id = self.env[field.relation].search([('x_studio_adms_id', '=', vals[key])], limit=1)
                 new_vals[key[17:]] = real_id.id
                 new_vals[key] = vals[key]
-                # If it's Business type, means we automatically find the company
-                if key == 'x_studio_adms_id_fal_business_type':
-                    new_vals['company_id'] = real_id.company_id.id
-                # Special case of created models
-                if key == 'x_studio_adms_id_x_studio_fal_business_type' or key == 'x_studio_adms_id_x_studio_business_type':
-                    new_vals['x_studio_company'] = real_id.company_id.id
             # Other field we just copy-paste
             else:
                 new_vals[key] = vals[key]
