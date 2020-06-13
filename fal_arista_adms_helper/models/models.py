@@ -23,7 +23,7 @@ class BaseModel(models.AbstractModel):
             #    Extra Issue are, some object did not have Business type
             #    ----------------------------
             #    Let's determine business type field in an object
-            business_type_field = model.field_id.filtered(lambda x: x.relation == 'fal.business.type')
+            business_type_field = model.field_id.filtered(lambda x: x.relation == 'fal.business.type' and x.ttype == 'many2one')
             # If business type field is present, search by adms_id + business type
             # TO DO: later there is some exception object
             domain = [('x_studio_adms_id', '=', vals['x_studio_adms_id'])]
@@ -44,14 +44,14 @@ class BaseModel(models.AbstractModel):
         # We want business type to be searched upfront, so whatever the sequence of input
         # There will be no error
         business_type = False
-        business_type_field = model.field_id.filtered(lambda x: x.relation == 'fal.business.type')
+        business_type_field = model.field_id.filtered(lambda x: x.relation == 'fal.business.type' and x.ttype == 'many2one')
         if business_type_field:
             business_type_adms_key = 'x_studio_adms_id_' + business_type_field.name
             for key in vals:
                 if key == business_type_adms_key:
                     business_type = self.env['fal.business.type'].browse(vals[key])
         # Also find the Company field as we want to fill it automatically when we found the business type
-        company_type_field = model.field_id.filtered(lambda x: x.relation == 'res.company')
+        company_type_field = model.field_id.filtered(lambda x: x.relation == 'res.company' and x.ttype == 'many2one')
 
         # For every field in vals
         for key in vals:
@@ -100,13 +100,14 @@ class BaseModel(models.AbstractModel):
                 if key == business_type_adms_key:
                     real_id = self.env[field.relation].search([('x_studio_adms_id', '=', vals[key])], limit=1)
                     # If it's Business type, means we automatically find the company
+                    print()
                     new_vals[company_type_field.name] = real_id.company_id.id
                 # Except that
                 else:
                     # If business type is present
                     # also include on our search business type domain
                     m2o_model = self.env['ir.model'].search([('model', '=', field.relation)])
-                    m2o_business_type = m2o_model.field_id.filtered(lambda x: x.relation == 'fal.business.type')
+                    m2o_business_type = m2o_model.field_id.filtered(lambda x: x.relation == 'fal.business.type' and x.ttype == 'many2one')
                     if m2o_business_type and m2o_model.model not in model_exception:
                         real_id = self.env[field.relation].search([('x_studio_adms_id', '=', vals[key]), (m2o_business_type.name, '=', business_type.id)], limit=1)
                     # If the object doesn't have business type
