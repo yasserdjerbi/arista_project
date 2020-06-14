@@ -37,7 +37,7 @@ class BaseModel(models.AbstractModel):
             domain = [('x_studio_adms_id', '=', vals['x_studio_adms_id'])]
             if business_type_field and model.model not in model_exception:
                 domain += [(business_type_field.name, '=', new_vals[business_type_field.name])]
-                similar_adms_id = self.search([('x_studio_adms_id', '=', vals['x_studio_adms_id']), ('fal_business_type', '=', new_vals['fal_business_type'])])
+                similar_adms_id = self.search([('x_studio_adms_id', '=', vals['x_studio_adms_id']), (business_type_field.name, '=', new_vals['fal_business_type'])])
             similar_adms_id = self.search([('x_studio_adms_id', '=', vals['x_studio_adms_id'])])
             if similar_adms_id:
                 result = similar_adms_id.write(new_vals)
