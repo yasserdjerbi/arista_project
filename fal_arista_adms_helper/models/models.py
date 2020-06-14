@@ -110,6 +110,11 @@ class BaseModel(models.AbstractModel):
                     # also include on our search business type domain
                     m2o_model = self.env['ir.model'].search([('model', '=', field.relation)])
                     m2o_business_type = m2o_model.field_id.filtered(lambda x: x.relation == 'fal.business.type' and x.ttype == 'many2one')
+                    # Special case for res.users object.
+                    # It will always have 2 many2one related to business type, because mirror
+                    # behavior of company
+                    if m2o_model.model == 'res.users':
+                        m2o_business_type = m2o_model.field_id.filtered(lambda x: x.relation == 'fal.business.type' and x.ttype == 'many2one' and x.name == 'fal_business_type')
                     if business_type and m2o_business_type and m2o_model.model not in model_exception:
                         real_id = self.env[field.relation].search([('x_studio_adms_id', '=', vals[key]), (m2o_business_type.name, '=', business_type.id)], limit=1)
                     # If the object doesn't have business type
