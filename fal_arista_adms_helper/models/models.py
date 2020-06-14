@@ -23,7 +23,7 @@ class BaseModel(models.AbstractModel):
                 business_type_adms_key = 'x_studio_adms_id_' + business_type_field.name
                 for key in vals:
                     if key == business_type_adms_key:
-                        business_type = self.env['fal.business.type'].browse(vals[key])
+                        business_type = self.env['fal.business.type'].search([('x_studio_adms_id', '=', vals[key])], limit=1)
             # 1. Translate any adms_id field into standard field
             new_vals = self.iterate_and_compute(model, vals, business_type)
             # 2. Determine wether it's create new or write
@@ -65,6 +65,7 @@ class BaseModel(models.AbstractModel):
                 # Need to change the model to the list field model
                 field = self.env['ir.model.fields'].search([('model_id', '=', model.id), ('name', '=', key)])
                 model = self.env['ir.model'].search([('model', '=', field.relation)], limit=1)
+                component_business_type_field = model.field_id.filtered(lambda x: x.relation == 'fal.business.type' and x.ttype == 'many2one')
                 # One2many component of API call set did not "have" ADMS ID
                 # At first we do not know this, so for work around, we just don't need to
                 # find out if component already have ADMS id, just always unlink all and
@@ -82,10 +83,8 @@ class BaseModel(models.AbstractModel):
                     elif o2m[0] == 6:
                         new_o2mid = []
                         # Here we want to map between the ADMS id given by API to Odoo ID
-                        # As 6, means that the API only throw ADMS ID, there is no way to check
-                        # also on the business type
                         for o2mid in o2m[2]:
-                            new_o2mid.append(self.env[model.model].search([('x_studio_adms_id', '=', o2mid)], limit=1).id)
+                            new_o2mid.append(self.env[model.model].search([('x_studio_adms_id', '=', o2mid), (component_business_type_field.name, '=', business_type.id)], limit=1).id)
                         new_vals[key] = [(6, 0, new_o2mid)]
             # If it's a share id field for many2one relation
             # Find the object based on field search
