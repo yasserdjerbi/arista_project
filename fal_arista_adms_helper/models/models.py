@@ -2,6 +2,9 @@
 from odoo import models, api
 from lxml.builder import E
 
+import logging
+_logger = logging.getLogger(__name__)
+
 # Model exception
 model_exception = ['res.partner', 'account.tax']
 
