@@ -10,6 +10,7 @@
                     <field name="property_business_account_receivable_id"/>
                     <field name="property_business_account_payable_id"/>
                     <field name="property_business_account_titipan_id"/>
+                    <field name="property_business_account_accrue_id"/>
                 </tree>
             </field>
         </record>
@@ -25,6 +26,7 @@
                             <field name="property_business_account_receivable_id"/>
                             <field name="property_business_account_payable_id"/>
                             <field name="property_business_account_titipan_id"/>
+                            <field name="property_business_account_accrue_id"/>
                         </group>
                     </sheet>
                 </form>

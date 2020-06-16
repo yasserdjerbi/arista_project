@@ -24,3 +24,7 @@ class CustVendGroupBD(models.Model):
         'account.account', company_dependent=True,
         string="Account Titipan",
         help="This business account will be used instead of the default one as the titipan account for the current partner",)
+    property_business_account_accrue_id = fields.Many2one(
+        'account.account', company_dependent=True,
+        string="Account Accrue",
+        help="This business account will be used instead of the default one as the accrue account for the current partner",)
