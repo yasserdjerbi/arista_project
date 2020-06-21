@@ -52,20 +52,20 @@ var SwitchBusinessTypeMenu = Widget.extend({
         this.company_business_type_mapping = session.company_business_type_map;
         // Auto click business type if mapping not match
         // Very dirty ways, but whatever
-        // for (var i = 0; i<this.company_business_type_mapping.length; i++){
-        //     // Business type company are not match selected company
-        //     // Automatically click setBusinessTypes
-        //     // And also include the company in case it did not have
-        //     if (this.company_business_type_mapping[i][1] === this.current_business_type){
-        //         if (this.company_business_type_mapping[i][0] !== this.current_company){
-        //             var new_allowed_company_ids = this.allowed_company_ids
-        //             if (new_allowed_company_ids.indexOf(this.company_business_type_mapping[i][0]) !== -1){
-        //                 new_allowed_company_ids.push(this.company_business_type_mapping[i][0])
-        //             }
-        //             session.setBusinessTypes(this.current_business_type, this.allowed_business_type_ids, this.company_business_type_mapping[i][0], new_allowed_company_ids);
-        //         }
-        //     }
-        // }
+        for (var i = 0; i<this.company_business_type_mapping.length; i++){
+            // Business type company are not match selected company
+            // Automatically click setBusinessTypes
+            // And also include the company in case it did not have
+            if (this.company_business_type_mapping[i][1] === this.current_business_type){
+                if (this.company_business_type_mapping[i][0] !== this.current_company){
+                    var new_allowed_company_ids = this.allowed_company_ids
+                    if (new_allowed_company_ids.indexOf(this.company_business_type_mapping[i][0]) !== -1){
+                        new_allowed_company_ids.push(this.company_business_type_mapping[i][0])
+                    }
+                    session.setBusinessTypes(this.current_business_type, this.allowed_business_type_ids, this.company_business_type_mapping[i][0], new_allowed_company_ids);
+                }
+            }
+        }
         return this._super.apply(this, arguments);
     },
 
