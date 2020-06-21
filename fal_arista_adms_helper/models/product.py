@@ -8,5 +8,4 @@ class ProductCategory(models.Model):
 
     property_account_discount_categ_id = fields.Many2one('account.account', company_dependent=True,
         string="Discount Account",
-        domain="['&', ('deprecated', '=', False), ('company_id', '=', current_company_id)]",
         help="This account will be used when there is a discount for customer invoice.")
