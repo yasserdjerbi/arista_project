@@ -7,3 +7,4 @@ from . import fal_reason_code
 from . import fal_no_rangka
 from . import fal_product_dimension
 from . import product
+from . import sale
