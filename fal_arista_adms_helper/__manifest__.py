@@ -23,6 +23,7 @@ ADMS / Arista have special request to just call one method to know:
     "depends": [
         'base',
         'sale',
+        'account_invoice_fixed_discount',
         'fal_business_type',
         'stock',
         'contacts',
